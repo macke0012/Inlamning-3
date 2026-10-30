@@ -1,0 +1,15 @@
+{
+  "courses": [],
+  "firstName": "Johan",
+  "lastName": "Ek",
+  "ssn": "20010101-1111",
+  "phoneNumber": "0731000001",
+  "email": "johan@student.se",
+  "adress": {
+    "street": "Vasagatan 2",
+    "zipCode": "41124",
+    "town": "Göteborg",
+    "country": "Sweden"
+  },
+  "id": "fd68a919-ef24-4d5e-8eed-f12879f410bf"
+}

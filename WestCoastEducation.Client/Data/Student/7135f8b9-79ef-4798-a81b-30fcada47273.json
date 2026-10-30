@@ -1,0 +1,30 @@
+{
+  "courses": [
+    {
+      "$type": "remote",
+      "platform": "Teams",
+      "meetingLink": "https://teams.microsoft.com/wce-oop",
+      "courseType": "Remote",
+      "teacherId": "ec89063f-db17-44ca-90cb-3539f9a330cd",
+      "courseNumber": "WCE-101",
+      "title": "Objektorienterad programmering",
+      "startDate": "2026-11-02",
+      "endDate": "2026-12-18",
+      "durationInWeeks": 6,
+      "id": "38df9750-f03c-45df-9e37-4ae958512ac9"
+    }
+  ],
+  "firstName": "Märta",
+  "lastName": "Ståhl",
+  "ssn": "20020202-2222",
+  "phoneNumber": "0731000002",
+  "email": "marta@student.se",
+  "adress": {
+    "street": "Drottninggatan 8",
+    "zipCode": "11151",
+    "town": "Stockholm",
+    "country": "Sweden"
+  },
+  "fullName": "Märta Ståhl",
+  "id": "7135f8b9-79ef-4798-a81b-30fcada47273"
+}

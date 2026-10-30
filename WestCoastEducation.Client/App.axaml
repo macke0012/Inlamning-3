@@ -1,0 +1,33 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="WestCoastEducation.Client.App"
+             xmlns:local="using:WestCoastEducation.Client"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator />
+    </Application.DataTemplates>
+
+    <Application.Styles>
+        <FluentTheme />
+        <StyleInclude Source="Assets/AppStyles.axaml"></StyleInclude>
+    </Application.Styles>
+             
+             <Application.Resources>
+                 <SolidColorBrush x:Key="Primary">#FF9B8CFF</SolidColorBrush>
+                 <SolidColorBrush x:Key="Secondary">#FF9AA8BD</SolidColorBrush>
+
+                 <SolidColorBrush x:Key="Background">#FF0B1020</SolidColorBrush>
+                 <SolidColorBrush x:Key="Surface">#FF111827</SolidColorBrush>
+                 <SolidColorBrush x:Key="ElevatedSurface">#FF151D30</SolidColorBrush>
+                 <SolidColorBrush x:Key="Border">#FF27334A</SolidColorBrush>
+
+                 <SolidColorBrush x:Key="TextPrimary">#FFF4F6FA</SolidColorBrush>
+                 <SolidColorBrush x:Key="TextSecondary">#FF9AA8BD</SolidColorBrush>
+
+                 <SolidColorBrush x:Key="Success">#FF5DE0B2</SolidColorBrush>
+                 <SolidColorBrush x:Key="Warning">#FFFFC66D</SolidColorBrush>
+                 <SolidColorBrush x:Key="Danger">#FFFF7185</SolidColorBrush>
+             </Application.Resources>
+</Application>

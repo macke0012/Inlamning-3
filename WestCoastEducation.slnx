@@ -1,0 +1,8 @@
+<Solution>
+  <Folder Name="/WestCoastEducation.Client/">
+    <Project Path="WestCoastEducation.Client/WestCoastEducationClient.csproj" />
+  </Folder>
+  <Folder Name="/WestCoastEducation.Core/">
+    <Project Path="WestCoastEducation.Core/WestCoastEducationCore.csproj" />
+  </Folder>
+</Solution>

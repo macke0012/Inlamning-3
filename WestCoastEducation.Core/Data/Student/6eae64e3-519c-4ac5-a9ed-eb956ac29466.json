@@ -1,0 +1,15 @@
+{
+  "courses": [],
+  "firstName": "Märta",
+  "lastName": "Ståhl",
+  "ssn": "20020202-2222",
+  "phoneNumber": "0731000002",
+  "email": "marta@student.se",
+  "adress": {
+    "street": "Drottninggatan 8",
+    "zipCode": "11151",
+    "town": "Stockholm",
+    "country": "Sweden"
+  },
+  "id": "6eae64e3-519c-4ac5-a9ed-eb956ac29466"
+}

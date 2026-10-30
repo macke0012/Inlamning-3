@@ -1,0 +1,26 @@
+{
+  "knowledgeArea": "C# och .NET",
+  "courses": [
+    {
+      "courseNumber": "WCE-101",
+      "title": "Objektorienterad programmering",
+      "startDate": "2026-11-02",
+      "endDate": "2026-12-18",
+      "durationInWeeks": 6,
+      "courseType": "Remote",
+      "id": "941e8f23-d0e6-4b04-b272-6ee6da52534f"
+    }
+  ],
+  "firstName": "Anna",
+  "lastName": "Svensson",
+  "ssn": "19800312-1234",
+  "phoneNumber": "0701112233",
+  "email": "anna@wce.se",
+  "adress": {
+    "street": "Storgatan 1",
+    "zipCode": "41101",
+    "town": "Göteborg",
+    "country": "Sweden"
+  },
+  "id": "916abdd2-eeca-4916-9304-2ee8b85098b7"
+}

@@ -1,0 +1,16 @@
+[{
+  "employmentDate": "2018-03-01T00:00:00",
+  "role": "Administrator",
+  "firstName": "Maria",
+  "lastName": "Lund",
+  "ssn": "19850909-9999",
+  "phoneNumber": "0709000003",
+  "email": "maria@wce.se",
+  "adress": {
+    "street": "Hamngatan 1",
+    "zipCode": "41106",
+    "town": "Göteborg",
+    "country": "Sweden"
+  },
+  "id": "4dd58ace-5f97-4502-a06d-cc7c179a8f86"
+}]

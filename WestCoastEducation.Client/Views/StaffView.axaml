@@ -1,0 +1,63 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:WestCoastEducation.Client.ViewModels"
+             xmlns:staff="clr-namespace:WestCoastEducation.Core.Models.People.Staff;assembly=WestCoastEducationCore"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="WestCoastEducation.Client.Views.StaffView"
+             x:DataType="viewModels:StaffViewModel">
+
+    <UserControl.Styles>
+        <!-- Same horizontal padding on rows and header so the columns line up -->
+        <Style Selector="ListBoxItem">
+            <Setter Property="Padding" Value="8,4" />
+        </Style>
+        <Style Selector="Grid.header > TextBlock">
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+    </UserControl.Styles>
+    <DockPanel Margin="5">
+        <Button DockPanel.Dock="Top" HorizontalAlignment="Right" Margin="0,0,0,5"
+                Content="Lägg till" Command="{Binding $parent[Window].((viewModels:MainWindowViewModel)DataContext).NavigateToAddPersonPageCommand}" />
+    <TabControl Margin="5"
+                HorizontalContentAlignment="Stretch"
+                VerticalContentAlignment="Stretch"
+                >
+      
+        <TabItem Header="Permanent Staff">
+            <TableView ItemsSource="{Binding PermanentStaff}"
+                       SelectedItem="{Binding SelectedObject}"
+                       
+                       >
+                <TableView.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Redigera"/>
+                    </ContextMenu>
+                </TableView.ContextMenu>
+                
+                <TableView.Columns>
+                    <TableViewColumn Header="Förnamn" Binding="{Binding FirstName}" />
+                    <TableViewColumn Header="Efternamn" Binding="{Binding LastName}" />
+                    <TableViewColumn Header="Telefon" Binding="{Binding PhoneNumber}" />
+                    <TableViewColumn Header="Mail" Binding="{Binding Email}" />
+                    <TableViewColumn Header="Personnummer" Binding="{Binding SSN}" />
+                    <TableViewColumn Header="Roll" Binding="{Binding Role}" />
+                    <TableViewColumn Header="Adress" Binding="{Binding Address}" />
+                </TableView.Columns>
+            </TableView>
+        </TabItem>
+
+        <TabItem Header="Teachers">
+            
+            <ListBox ItemsSource="{Binding Teachers}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="staff:Teacher">
+                        <TextBlock Text="{Binding FullName}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
+    </TabControl>
+</DockPanel>
+</UserControl>

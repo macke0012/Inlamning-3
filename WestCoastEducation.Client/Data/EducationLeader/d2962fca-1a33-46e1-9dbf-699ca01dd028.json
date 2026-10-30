@@ -1,0 +1,85 @@
+{
+  "_responsibleTeachers": [
+    {
+      "knowledgeArea": "C# och .NET",
+      "courses": [
+        {
+          "$type": "remote",
+          "platform": "Teams",
+          "meetingLink": "https://teams.microsoft.com/wce-oop",
+          "courseType": "Remote",
+          "teacherId": "ec89063f-db17-44ca-90cb-3539f9a330cd",
+          "courseNumber": "WCE-101",
+          "title": "Objektorienterad programmering",
+          "startDate": "2026-11-02",
+          "endDate": "2026-12-18",
+          "durationInWeeks": 6,
+          "id": "38df9750-f03c-45df-9e37-4ae958512ac9"
+        }
+      ],
+      "firstName": "Anna",
+      "lastName": "Svensson",
+      "ssn": "19800312-1234",
+      "phoneNumber": "0701112233",
+      "email": "anna@wce.se",
+      "adress": {
+        "street": "Storgatan 1",
+        "zipCode": "41101",
+        "town": "Göteborg",
+        "country": "Sweden"
+      },
+      "fullName": "Anna Svensson",
+      "id": "ec89063f-db17-44ca-90cb-3539f9a330cd"
+    },
+    {
+      "knowledgeArea": "Databaser",
+      "courses": [
+        {
+          "$type": "classroom",
+          "location": {
+            "street": "Lärargatan 5",
+            "zipCode": "41102",
+            "town": "Göteborg",
+            "country": "Sweden"
+          },
+          "lectureHall": "Sal A1",
+          "courseType": "Classroom",
+          "teacherId": "3675a945-5cdf-4ec2-913c-398339b0f631",
+          "courseNumber": "WCE-201",
+          "title": "SQL och databasdesign",
+          "startDate": "2026-11-09",
+          "endDate": "2026-12-04",
+          "durationInWeeks": 3,
+          "id": "3ad0e81b-437c-4f2c-9ab8-475ae49a7b6f"
+        }
+      ],
+      "firstName": "Erik",
+      "lastName": "Lindqvist",
+      "ssn": "19751120-5678",
+      "phoneNumber": "0702223344",
+      "email": "erik@konsult.se",
+      "adress": {
+        "street": "Kungsgatan 12",
+        "zipCode": "11143",
+        "town": "Stockholm",
+        "country": "Sweden"
+      },
+      "fullName": "Erik Lindqvist",
+      "id": "3675a945-5cdf-4ec2-913c-398339b0f631"
+    }
+  ],
+  "employmentDate": "2015-08-17T00:00:00",
+  "firstName": "Karin",
+  "lastName": "Åkesson",
+  "ssn": "19700707-7777",
+  "phoneNumber": "0709000001",
+  "email": "karin@wce.se",
+  "adress": {
+    "street": "Avenyn 10",
+    "zipCode": "41136",
+    "town": "Göteborg",
+    "country": "Sweden"
+  },
+  "fullName": "Karin Åkesson",
+  "id": "d2962fca-1a33-46e1-9dbf-699ca01dd028"
+}

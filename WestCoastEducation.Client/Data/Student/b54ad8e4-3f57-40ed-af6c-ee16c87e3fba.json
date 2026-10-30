@@ -1,0 +1,48 @@
+{
+  "courses": [
+    {
+      "$type": "remote",
+      "platform": "Teams",
+      "meetingLink": "https://teams.microsoft.com/wce-oop",
+      "courseType": "Remote",
+      "teacherId": "ec89063f-db17-44ca-90cb-3539f9a330cd",
+      "courseNumber": "WCE-101",
+      "title": "Objektorienterad programmering",
+      "startDate": "2026-11-02",
+      "endDate": "2026-12-18",
+      "durationInWeeks": 6,
+      "id": "38df9750-f03c-45df-9e37-4ae958512ac9"
+    },
+    {
+      "$type": "classroom",
+      "location": {
+        "street": "Lärargatan 5",
+        "zipCode": "41102",
+        "town": "Göteborg",
+        "country": "Sweden"
+      },
+      "lectureHall": "Sal A1",
+      "courseType": "Classroom",
+      "teacherId": "3675a945-5cdf-4ec2-913c-398339b0f631",
+      "courseNumber": "WCE-201",
+      "title": "SQL och databasdesign",
+      "startDate": "2026-11-09",
+      "endDate": "2026-12-04",
+      "durationInWeeks": 3,
+      "id": "3ad0e81b-437c-4f2c-9ab8-475ae49a7b6f"
+    }
+  ],
+  "firstName": "Johan",
+  "lastName": "Ek",
+  "ssn": "20010101-1111",
+  "phoneNumber": "0731000001",
+  "email": "johan@student.se",
+  "adress": {
+    "street": "Vasagatan 2",
+    "zipCode": "41124",
+    "town": "Göteborg",
+    "country": "Sweden"
+  },
+  "fullName": "Johan Ek",
+  "id": "b54ad8e4-3f57-40ed-af6c-ee16c87e3fba"
+}

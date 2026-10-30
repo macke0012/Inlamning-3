@@ -1,0 +1,31 @@
+{
+  "knowledgeArea": "C# och .NET",
+  "courses": [
+    {
+      "$type": "remote",
+      "platform": "Teams",
+      "meetingLink": "https://teams.microsoft.com/wce-oop",
+      "courseType": "Remote",
+      "teacherId": "ec89063f-db17-44ca-90cb-3539f9a330cd",
+      "courseNumber": "WCE-101",
+      "title": "Objektorienterad programmering",
+      "startDate": "2026-11-02",
+      "endDate": "2026-12-18",
+      "durationInWeeks": 6,
+      "id": "38df9750-f03c-45df-9e37-4ae958512ac9"
+    }
+  ],
+  "firstName": "Anna",
+  "lastName": "Svensson",
+  "ssn": "19800312-1234",
+  "phoneNumber": "0701112233",
+  "email": "anna@wce.se",
+  "adress": {
+    "street": "Storgatan 1",
+    "zipCode": "41101",
+    "town": "Göteborg",
+    "country": "Sweden"
+  },
+  "fullName": "Anna Svensson",
+  "id": "ec89063f-db17-44ca-90cb-3539f9a330cd"
+}

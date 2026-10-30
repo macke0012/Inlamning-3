@@ -1,0 +1,70 @@
+[{
+  "_responsibleTeachers": [
+    {
+      "knowledgeArea": "C# och .NET",
+      "courses": [
+        {
+          "courseNumber": "WCE-101",
+          "title": "Objektorienterad programmering",
+          "startDate": "2026-11-02",
+          "endDate": "2026-12-18",
+          "durationInWeeks": 6,
+          "courseType": "Remote",
+          "id": "941e8f23-d0e6-4b04-b272-6ee6da52534f"
+        }
+      ],
+      "firstName": "Anna",
+      "lastName": "Svensson",
+      "ssn": "19800312-1234",
+      "phoneNumber": "0701112233",
+      "email": "anna@wce.se",
+      "adress": {
+        "street": "Storgatan 1",
+        "zipCode": "41101",
+        "town": "Göteborg",
+        "country": "Sweden"
+      },
+      "id": "916abdd2-eeca-4916-9304-2ee8b85098b7"
+    },
+    {
+      "knowledgeArea": "Databaser",
+      "courses": [
+        {
+          "courseNumber": "WCE-201",
+          "title": "SQL och databasdesign",
+          "startDate": "2026-11-09",
+          "endDate": "2026-12-04",
+          "durationInWeeks": 3,
+          "courseType": "Classroom",
+          "id": "838561d2-5e4e-4a07-aa57-6a1d48a6194d"
+        }
+      ],
+      "firstName": "Erik",
+      "lastName": "Lindqvist",
+      "ssn": "19751120-5678",
+      "phoneNumber": "0702223344",
+      "email": "erik@konsult.se",
+      "adress": {
+        "street": "Kungsgatan 12",
+        "zipCode": "11143",
+        "town": "Stockholm",
+        "country": "Sweden"
+      },
+      "id": "7bf0426c-3f63-437e-a1bd-97252d7ff04d"
+    }
+  ],
+  "employmentDate": "2015-08-17T00:00:00",
+  "role": "EducationLeader",
+  "firstName": "Karin",
+  "lastName": "Åkesson",
+  "ssn": "19700707-7777",
+  "phoneNumber": "0709000001",
+  "email": "karin@wce.se",
+  "adress": {
+    "street": "Avenyn 10",
+    "zipCode": "41136",
+    "town": "Göteborg",
+    "country": "Sweden"
+  },
+  "id": "b1f71fbf-e8f4-4832-8989-d88e7cb91a1d"
+}]

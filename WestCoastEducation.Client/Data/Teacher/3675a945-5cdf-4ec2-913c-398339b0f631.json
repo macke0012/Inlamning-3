@@ -1,0 +1,36 @@
+{
+  "knowledgeArea": "Databaser",
+  "courses": [
+    {
+      "$type": "classroom",
+      "location": {
+        "street": "Lärargatan 5",
+        "zipCode": "41102",
+        "town": "Göteborg",
+        "country": "Sweden"
+      },
+      "lectureHall": "Sal A1",
+      "courseType": "Classroom",
+      "teacherId": "3675a945-5cdf-4ec2-913c-398339b0f631",
+      "courseNumber": "WCE-201",
+      "title": "SQL och databasdesign",
+      "startDate": "2026-11-09",
+      "endDate": "2026-12-04",
+      "durationInWeeks": 3,
+      "id": "3ad0e81b-437c-4f2c-9ab8-475ae49a7b6f"
+    }
+  ],
+  "firstName": "Erik",
+  "lastName": "Lindqvist",
+  "ssn": "19751120-5678",
+  "phoneNumber": "0702223344",
+  "email": "erik@konsult.se",
+  "adress": {
+    "street": "Kungsgatan 12",
+    "zipCode": "11143",
+    "town": "Stockholm",
+    "country": "Sweden"
+  },
+  "fullName": "Erik Lindqvist",
+  "id": "3675a945-5cdf-4ec2-913c-398339b0f631"
+}
