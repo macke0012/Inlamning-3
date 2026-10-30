@@ -55,8 +55,8 @@ public class School
     public async Task<Student> GetStudent(string id) => await StudentService.GetSingle(id);
     public async Task<EducationLeader> GetEducationLeader(string id) => (EducationLeader)await StaffService.GetSingle(id);
     public async Task<Administrator> GetAdministrator(string id) => (Administrator)await StaffService.GetSingle(id);
-    public async Task<RemoteBaseCourse> GetRemoteCourse(string id) => (RemoteBaseCourse)await CourseService.GetSingle(id);
-    public async Task<ClassroomBaseCourse> GetClassroomCourse(string id) => (ClassroomBaseCourse)await CourseService.GetSingle(id);
+    public async Task<RemoteCourse> GetRemoteCourse(string id) => (RemoteCourse)await CourseService.GetSingle(id);
+    public async Task<ClassroomCourse> GetClassroomCourse(string id) => (ClassroomCourse)await CourseService.GetSingle(id);
 
     public async Task UpdateStudent(Student newStudentData) => await StudentService.Update(newStudentData);
     public async Task UpdateTeacher(Teacher newTeacherData) => await StaffService.Update(newTeacherData);

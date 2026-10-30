@@ -34,7 +34,7 @@ public static class DataCreator
         school.AddStaff(anna);
         school.AddStaff(erik);
 
-        var oop = new RemoteBaseCourse(Platform.Teams, "https://teams.microsoft.com/wce-oop")
+        var oop = new RemoteCourse(Platform.Teams, "https://teams.microsoft.com/wce-oop")
         {
             CourseNumber = "WCE-101",
             Title = "Objektorienterad programmering",
@@ -43,7 +43,7 @@ public static class DataCreator
 
         };
         oop.AssignTeacher(anna);
-        var sql = new ClassroomBaseCourse(CreateAdress("Lärargatan 5", "41102", "Göteborg"), "Sal A1")
+        var sql = new ClassroomCourse(CreateAdress("Lärargatan 5", "41102", "Göteborg"), "Sal A1")
         {
             CourseNumber = "WCE-201",
             Title = "SQL och databasdesign",

@@ -6,17 +6,14 @@ namespace WestCoastEducation.Core.Models.People.Staff;
 [DisplayName("Utbildningsledare")]
 public class EducationLeader : PermanentStaff
 {
-    [JsonInclude]
     private List<Teacher> _responsibleTeachers = new List<Teacher>(); //Utbildningsledaren ansvarar för en eller flera lärare. 
 
-    [JsonIgnore]
+
     public IReadOnlyCollection<TeacherLeadBaseCourse> ResponsibleCourses => _responsibleTeachers //Utbildningsledaren har alla kurser som lärarna ansvarar för.
         .SelectMany(t => t.Courses)
         .OfType<TeacherLeadBaseCourse>()
         .DistinctBy(c => c.Id)
         .ToList();
-
-    [JsonIgnore]
     public IReadOnlyCollection<Teacher> ResponsibleTeachers => _responsibleTeachers;
 
     public void AssignTeacher(Teacher teacher)

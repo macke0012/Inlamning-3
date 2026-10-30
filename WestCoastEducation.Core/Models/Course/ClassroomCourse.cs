@@ -1,14 +1,16 @@
+using MongoDB.Bson.Serialization.Attributes;
 using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Core.Models.Course;
 
-public class ClassroomBaseCourse : TeacherLeadBaseCourse
+[BsonDiscriminator("ClassroomCourse")]
+public class ClassroomCourse : TeacherLeadBaseCourse
 {
     public Address Location { get; set; }
     public string LectureHall { get; set; }
     public override CourseType CourseType => CourseType.Classroom;
 
-    public ClassroomBaseCourse(Address location, string lectureHall)
+    public ClassroomCourse(Address location, string lectureHall)
     {
         Location = location;
         LectureHall = lectureHall;

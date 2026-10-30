@@ -1,17 +1,18 @@
+using MongoDB.Bson.Serialization.Attributes;
 using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Core.Models.Course;
 
 public enum Platform { Zoom, Teams, GoogleMeet, Discord }
 
-
-public class RemoteBaseCourse : TeacherLeadBaseCourse
+[BsonDiscriminator("RemoteCourse")]
+public class RemoteCourse : TeacherLeadBaseCourse
 {
     public Platform Platform { get; set; }
     public string MeetingLink { get; set; }
     public override CourseType CourseType => CourseType.Remote;
 
-    public RemoteBaseCourse(Platform platform, string meetingLink)
+    public RemoteCourse(Platform platform, string meetingLink)
     {
         Platform = platform;
         MeetingLink = meetingLink;

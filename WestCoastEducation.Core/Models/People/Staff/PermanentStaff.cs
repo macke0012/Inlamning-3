@@ -10,7 +10,6 @@ public abstract class PermanentStaff : BaseStaff
     public required DateTime EmploymentDate { get; set; }
     
 
-    [BsonIgnore]
     public TimeSpan EmploymentDuration => DateTime.Now - EmploymentDate;
 
     public override string ToString() =>

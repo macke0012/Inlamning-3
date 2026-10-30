@@ -8,8 +8,8 @@ namespace WestCoastEducation.Core.Services;
 public class CourseService : BaseService<BaseCourse> 
 {
     public List<BaseCourse> Courses { get; private set; } = [];
-    public List<RemoteBaseCourse> RemoteCourses => Courses.OfType<RemoteBaseCourse>().ToList();
-    public List<ClassroomBaseCourse> ClassroomCourses => Courses.OfType<ClassroomBaseCourse>().ToList();
+    public List<RemoteCourse> RemoteCourses => Courses.OfType<RemoteCourse>().ToList();
+    public List<ClassroomCourse> ClassroomCourses => Courses.OfType<ClassroomCourse>().ToList();
 
     public CourseService(IStorageProvider db) : base(db)
     {

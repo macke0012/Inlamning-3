@@ -3,10 +3,11 @@ using Microsoft.Extensions.DependencyInjection;
 using WestCoastEducation.Client.Factories;
 using WestCoastEducation.Client.ViewModels;
 using WestCoastEducation.Core.Interfaces;
-using WestCoastEducation.Core.Models.Course;
 using WestCoastEducation.Core.Services;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Repositories;
+using WestCoastEducation.Client.Enums;
+
 
 
 namespace WestCoastEducation.Client.Helpers;
@@ -30,6 +31,14 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<StudentService>();
         collection.AddSingleton<CourseService>();
         collection.AddSingleton<School>();
+
+        collection.AddSingleton<Func<PageViewsEnum, ViewModelBase>>(c => name => name switch
+        {
+            PageViewsEnum.HOME => c.GetRequiredService<HomeViewModel>(),
+            PageViewsEnum.COURSES => throw new NotImplementedException(),
+            PageViewsEnum.STAFF => c.GetRequiredService<StaffViewModel>(),
+            _ => throw new InvalidOperationException()
+        });
 
     }
 }

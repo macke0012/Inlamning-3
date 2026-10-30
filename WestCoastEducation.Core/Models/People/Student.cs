@@ -8,12 +8,12 @@ public class Student : Person
 {
     
     [BsonIgnore]
-    public List<Course.BaseCourse> Courses { get; private set; } = [];
+    public List<BaseCourse> Courses { get; private set; } = [];
 
-    private List<string> _courseIds = new List<string>();
+    private List<string> _courseIds = [];
     
 
-    public void Enroll(Course.BaseCourse baseCourse)
+    public void Enroll(BaseCourse baseCourse)
     {
         if (Courses.Any(c => c.Id == baseCourse.Id))
         {
@@ -23,7 +23,7 @@ public class Student : Person
         _courseIds.Add(baseCourse.Id);
     }
 
-    public void Unenroll(Course.BaseCourse baseCourse)
+    public void Unenroll(BaseCourse baseCourse)
     {
         Courses.RemoveAll(c => c.Id == baseCourse.Id);
         _courseIds.RemoveAll(c => c == baseCourse.Id);

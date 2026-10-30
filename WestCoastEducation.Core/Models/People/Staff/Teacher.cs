@@ -9,12 +9,13 @@ public class Teacher : BaseStaff
 {
     public string KnowledgeArea { get; set; } = "";
 
-    [JsonInclude]
-    public List<Course.BaseCourse> Courses { get; private set; } = [];
+    [JsonIgnore]
     [BsonIgnore]
+    public List<BaseCourse> Courses { get; private set; } = [];
+    
     public List<string> CourseIds { get; private set; } = [];
 
-    public void AddCourse(Course.BaseCourse baseCourse)
+    public void AddCourse(BaseCourse baseCourse)
     {
         if (Courses.Any(c => c.Id == baseCourse.Id))
         {
@@ -24,7 +25,7 @@ public class Teacher : BaseStaff
         CourseIds.Add(baseCourse.Id);
     }
 
-    public void RemoveCourse(Course.BaseCourse baseCourse)
+    public void RemoveCourse(BaseCourse baseCourse)
     {
         Courses.RemoveAll(c => c.Id == baseCourse.Id);
     }
