@@ -8,7 +8,6 @@
         x:DataType="viewModels:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="WestCoastEducationClient"
-        
         >
     
     

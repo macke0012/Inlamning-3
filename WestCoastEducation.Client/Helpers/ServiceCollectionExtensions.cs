@@ -23,7 +23,6 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<MainWindowViewModel>();
         collection.AddSingleton<PageViewFactory>();
         collection.AddTransient<HomeViewModel>();
-        collection.AddTransient<StaffViewModel>();
         collection.AddSingleton<IStorageProvider, DataBaseClient>();
         
 
@@ -36,7 +35,7 @@ public static class ServiceCollectionExtensions
         {
             PageViewsEnum.HOME => c.GetRequiredService<HomeViewModel>(),
             PageViewsEnum.COURSES => throw new NotImplementedException(),
-            PageViewsEnum.STAFF => c.GetRequiredService<StaffViewModel>(),
+         
             _ => throw new InvalidOperationException()
         });
 

@@ -10,10 +10,6 @@ namespace WestCoastEducation.Client.ViewModels;
 public partial class ViewModelBase : ObservableObject
 {
     [ObservableProperty] public partial string PageTitle { get; set; } = ""; 
-    [ObservableProperty] public partial IStorageObject? SelectedObject { get; set; } = null;
     
-    [RelayCommand]
-    void SetActiveObject(BaseStaff obj) => SelectedObject = obj;
-
    
 }

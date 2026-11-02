@@ -23,20 +23,7 @@ public class School
     public void AddStaff(BaseStaff staff) => Task.Run(() => StaffService.Create(staff)).Wait();
     public void AddStudent(Student student) => Task.Run(() => StudentService.Create(student)).Wait();
 
-    public async Task<IStorageObject?> GetObject<T>(string id)
-    {
-        IStorageObject? obj = StaffService.Staff.FirstOrDefault(s => s.Id == id);
-        if (obj is not null) return obj;
-        obj = await StudentService.GetSingle(id);
-        if (obj is not null) return obj;
-        obj = await CourseService.GetSingle(id);
-        if (obj is not null) return obj;
-        return null;
-
-
-
-    }
-
+    
     public async Task UpdatePerson(Person person)
     {
         if(person is BaseStaff staff) await StaffService.Update(staff);

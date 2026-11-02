@@ -26,7 +26,7 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.HOME);
         _school = school;
         
-        WeakReferenceMessenger.Default.RegisterAll(this);
+        
     }
 
     [RelayCommand]
@@ -42,6 +42,5 @@ public partial class MainWindowViewModel : ViewModelBase
     private void NavigateToAddPersonPage() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.ADDPERSON);
 
     
-    //MainWindowViewModel hanterar fortfarande navigationen, men får förfrågan från en annan viewmodel som vill redigera ett object.
     
 }
