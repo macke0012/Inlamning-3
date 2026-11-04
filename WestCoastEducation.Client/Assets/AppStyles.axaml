@@ -9,9 +9,11 @@
     <!-- Add Styles Here -->
     <Style Selector="Window">
         <Setter Property="Background" Value="{DynamicResource Background}"/>
-        
     </Style>
     <Style Selector="TextBlock">
+        <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"></Setter>
+    </Style>
+    <Style Selector="Label">
         <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"></Setter>
     </Style>
     <Style Selector="Button">
@@ -19,6 +21,5 @@
     </Style>
     <Style Selector="TableView">
         <Setter Property="Background" Value="{DynamicResource Surface}"></Setter>
-        
     </Style>
 </Styles>

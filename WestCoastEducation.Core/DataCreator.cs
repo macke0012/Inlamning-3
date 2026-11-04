@@ -1,3 +1,4 @@
+using WestCoastEducation.Core.Enum;
 using WestCoastEducation.Core.Models;
 using WestCoastEducation.Core.Models.Course;
 using WestCoastEducation.Core.Models.People;
@@ -19,8 +20,10 @@ public static class DataCreator
             PhoneNumber = "0701112233",
             Email = "anna@wce.se",
             Address = CreateAdress("Storgatan 1", "41101", "Göteborg"),
-            KnowledgeArea = "C# och .NET"
+            
+            
         };
+        anna.AddCompetencies(Competencies.ActiveDirectory, Competencies.Algorithms, Competencies.AsynchronousProgramming);
         var erik = new Teacher
         {
             FirstName = "Erik",
@@ -28,9 +31,10 @@ public static class DataCreator
             SSN = "19751120-5678",
             PhoneNumber = "0702223344",
             Email = "erik@konsult.se",
-            Address = CreateAdress("Kungsgatan 12", "11143", "Stockholm"),
-            KnowledgeArea = "Databaser"
+            Address = CreateAdress("Kungsgatan 12", "11143", "Stockholm" ),
+            
         };
+        erik.AddCompetencies(Competencies.Algorithms, Competencies.AsynchronousProgramming, Competencies.DataStructures);
         school.AddStaff(anna);
         school.AddStaff(erik);
 
@@ -110,6 +114,6 @@ public static class DataCreator
 
     private static Address CreateAdress(string street, string zipCode, string town)
     {
-        return new Address { Street = street, ZipCode = zipCode, Town = town, Country = "Sweden" };
+        return new Address { Street = street, ZipCode = zipCode, Town = town, Country = Country.Sweden };
     }
 }

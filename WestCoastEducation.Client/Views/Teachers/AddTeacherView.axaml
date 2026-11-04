@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:teacher="clr-namespace:WestCoastEducation.Client.ViewModels.Teachers"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="teacher:AddTeacherViewModel"
+             x:Class="WestCoastEducation.Client.Views.Teachers.AddTeacherView">
+    <StackPanel>
+        <Label Content="Komeptenser"></Label>
+        <ListBox MaxHeight="200" SelectedItems="{Binding SelectedCompetencies}" ItemsSource="{Binding Competencies}" SelectionMode="Multiple,Toggle"/>
+        <StackPanel>
+            <Label Content="Förnamn"></Label>
+            <TextBox Text="{Binding FirstName}" />
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Efternamn"></Label>
+            <TextBox Text="{Binding LastName}" />
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Telefon"></Label>
+            <TextBox Text="{Binding PhoneNumber}" />
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Personnummer"></Label>
+            <TextBox Text="{Binding SSN}" />
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Email"></Label>
+            <TextBox Text="{Binding Email}" />
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Gata"></Label>
+            <TextBox Text="{Binding Street}" />
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Postnummer"></Label>
+            <TextBox Text="{Binding ZipCode}" />
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Stad"></Label>
+            <TextBox Text="{Binding Town}" />
+        </StackPanel>
+        <StackPanel>
+            <Label Content="Land"></Label>
+            <ComboBox
+                
+                SelectedItem="{Binding Country}"
+                ItemsSource="{Binding Countries}">
+            </ComboBox>
+        </StackPanel>
+        <Button Content="Spara Lärare" Command="{Binding AddTeacherCommand}"></Button>
+    </StackPanel>
+</UserControl>

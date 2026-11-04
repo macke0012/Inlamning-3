@@ -1,0 +1,27 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             xmlns:teachers="clr-namespace:WestCoastEducation.Client.ViewModels.Teachers"
+             xmlns:vm="using:WestCoastEducation.Client.ViewModels"
+             x:DataType="teachers:TeacherViewModel"
+             x:Class="WestCoastEducation.Client.Views.Teachers.TeacherView">
+   <Grid RowDefinitions="Auto,*">
+       <StackPanel>
+           <Button Content="Skapa lärare"
+                   Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToAddTeacherCommand}"/>
+       </StackPanel>
+       <TableView Grid.Row="1" ItemsSource="{Binding Teachers}">
+           <TableView.Columns>
+               <TableViewColumn Header="Förnamn" Binding="{Binding FirstName}"></TableViewColumn>
+               <TableViewColumn Header="Efternamn" Binding="{Binding LastName}"></TableViewColumn>
+               <TableViewColumn Header="Telefon" Binding="{Binding PhoneNumber}"></TableViewColumn>
+               <TableViewColumn Header="E-post" Binding="{Binding Email}"></TableViewColumn>
+               <TableViewColumn Header="Personnummer" Binding="{Binding SSN}"></TableViewColumn>
+               <TableViewColumn Header="Kompetenser" Binding="{Binding KnowledgeArea}"></TableViewColumn>
+           </TableView.Columns>
+       </TableView>
+   </Grid>
+    
+</UserControl>

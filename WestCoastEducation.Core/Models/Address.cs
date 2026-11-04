@@ -8,7 +8,7 @@ public class Address
     public required string Street { get; set; }
     public required string ZipCode { get; set; }
     public required string Town { get; set; }
-    public required string Country { get; set; }
+    public required Country Country { get; set; }
 
     public override string ToString()
     {

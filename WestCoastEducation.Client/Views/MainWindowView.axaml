@@ -7,28 +7,42 @@
         x:Class="WestCoastEducation.Client.Views.MainWindowView"
         x:DataType="viewModels:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="WestCoastEducationClient"
-        >
-    
-    
+        Title="WestCoastEducationClient">
 
-<StackPanel HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-    <Grid ColumnDefinitions="Auto, *">
+    <Grid ColumnDefinitions="200, *">
 
-        <StackPanel Background="{DynamicResource Surface}" VerticalAlignment="Stretch">
-            <TextBlock Text="Westcoast Education" FontSize="18" HorizontalAlignment="Center" Padding="0,10,0,20" Foreground="{DynamicResource Primary}"/>
-            <Button HorizontalAlignment="Stretch" Margin="5,2" Command="{Binding NavigateToStaffPageCommand}">
-                <TextBlock HorizontalAlignment="Center" Text="Staff"></TextBlock>
+        <!-- Sidebar: now stretches full height -->
+        <StackPanel Grid.Column="0" Background="{DynamicResource Surface}">
+            <TextBlock Text="Westcoast Education"
+                       FontSize="18"
+                       HorizontalAlignment="Center"
+                       Margin="0,10,0,20"
+                       Foreground="{DynamicResource TextPrimary}" />
+
+            <Button 
+                HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Margin="5,2"
+                    Command="{Binding NavigateToTeachersPageCommand}">
+                <TextBlock Text="Teachers" />
             </Button>
-            <Button HorizontalAlignment="Stretch" Margin="5,2" Command="{Binding NavigateToStudentsPageCommand}">
-                <TextBlock HorizontalAlignment="Center" Text="Students"></TextBlock>
+
+            <Button HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Margin="5,2"
+                    Command="{Binding NavigateToStudentsPageCommand}">
+                <TextBlock Text="Students" />
             </Button>
-            <Button HorizontalAlignment="Stretch" Margin="5,2" Command="{Binding NavigateToCoursesPageCommand}">
-                <TextBlock HorizontalAlignment="Center" Text="Courses" />
+
+            <Button HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Center"
+                    Margin="5,2"
+                    Command="{Binding NavigateToCoursesPageCommand}">
+                <TextBlock Text="Courses" />
             </Button>
         </StackPanel>
-        <UserControl Grid.Column="1" Content="{Binding CurrentPage}"  ></UserControl>
-    </Grid>
-</StackPanel>
 
+        <!-- Page host -->
+        <ContentControl Grid.Column="1" Content="{Binding CurrentPage}" />
+    </Grid>
 </Window>

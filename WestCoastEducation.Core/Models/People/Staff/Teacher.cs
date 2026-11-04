@@ -2,12 +2,23 @@ using System.ComponentModel;
 using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using WestCoastEducation.Core.Models.Course;
+using WestCoastEducation.Core.Enum;
 
 namespace WestCoastEducation.Core.Models.People.Staff;
-[DisplayName("Lärare")]
+
 public class Teacher : BaseStaff
 {
-    public string KnowledgeArea { get; set; } = "";
+    private List<Competencies> _compentencies { get; set; }
+
+    public string KnowledgeArea
+    {
+        get
+        {
+            string value = "";
+            foreach (var comp in _compentencies) value += comp.ToString() + "\n";
+            return value;
+        }
+    }
 
     [JsonIgnore]
     [BsonIgnore]
@@ -23,6 +34,11 @@ public class Teacher : BaseStaff
         }
         Courses.Add(baseCourse);
         CourseIds.Add(baseCourse.Id);
+    }
+    
+    public void AddCompetencies(params List<Competencies> competencies)
+    {
+        _compentencies.AddRange(competencies);
     }
 
     public void RemoveCourse(BaseCourse baseCourse)

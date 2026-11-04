@@ -11,7 +11,20 @@ public class Student : Person
     public List<BaseCourse> Courses { get; private set; } = [];
 
     private List<string> _courseIds = [];
-    
+
+    public string CoursesNames
+    {
+        get
+        {
+            string value = "";
+            Courses.ForEach(c =>
+            {
+                value += c.Title + "\n";
+            });
+            return value;
+        }
+    }
+
 
     public void Enroll(BaseCourse baseCourse)
     {

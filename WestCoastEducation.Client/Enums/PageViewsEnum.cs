@@ -3,12 +3,12 @@ namespace WestCoastEducation.Client.Enums;
 public enum PageViewsEnum
 {
     HOME,
-    STAFF,
+    TEACHER,
     STUDENT,
     COURSES,
-    ADDCOURSE,
-    EDITCOURSE,
-    ADDPERSON,
-    EDITPERSON,
+    ADD_TEACHER,
+    ADD_STUDENT,
+    ADD_COURSE,
+    
     
 }

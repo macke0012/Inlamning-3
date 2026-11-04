@@ -7,7 +7,9 @@ using WestCoastEducation.Core.Services;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Repositories;
 using WestCoastEducation.Client.Enums;
-
+using WestCoastEducation.Client.ViewModels.Courses;
+using WestCoastEducation.Client.ViewModels.Students;
+using WestCoastEducation.Client.ViewModels.Teachers;
 
 
 namespace WestCoastEducation.Client.Helpers;
@@ -23,6 +25,10 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<MainWindowViewModel>();
         collection.AddSingleton<PageViewFactory>();
         collection.AddTransient<HomeViewModel>();
+        collection.AddTransient<CourseViewModel>();
+        collection.AddTransient<TeacherViewModel>();
+        collection.AddTransient<StudentViewModel>();
+        collection.AddTransient<AddTeacherViewModel>();
         collection.AddSingleton<IStorageProvider, DataBaseClient>();
         
 
@@ -34,8 +40,10 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<Func<PageViewsEnum, ViewModelBase>>(c => name => name switch
         {
             PageViewsEnum.HOME => c.GetRequiredService<HomeViewModel>(),
-            PageViewsEnum.COURSES => throw new NotImplementedException(),
-         
+            PageViewsEnum.COURSES => c.GetRequiredService<CourseViewModel>(),
+            PageViewsEnum.TEACHER => c.GetRequiredService<TeacherViewModel>(),
+            PageViewsEnum.STUDENT => c.GetRequiredService<StudentViewModel>(),
+            PageViewsEnum.ADD_TEACHER => c.GetRequiredService<AddTeacherViewModel>(),
             _ => throw new InvalidOperationException()
         });
 
