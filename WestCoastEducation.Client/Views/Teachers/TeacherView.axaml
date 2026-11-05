@@ -12,8 +12,15 @@
            <Button Content="Skapa lärare"
                    Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToAddTeacherCommand}"/>
        </StackPanel>
-       <TableView Grid.Row="1" ItemsSource="{Binding Teachers}">
+       <TableView Grid.Row="1" ItemsSource="{Binding Teachers}" SelectedItem="{Binding SelectedTeacher}">
+           <TableView.ContextMenu>
+               <ContextMenu>
+                   <MenuItem Command="{Binding DeleteTeacherCommand}" CommandParameter="{Binding SelectedTeacher}"></MenuItem>
+               </ContextMenu>
+           </TableView.ContextMenu>
+           
            <TableView.Columns>
+               
                <TableViewColumn Header="Förnamn" Binding="{Binding FirstName}"></TableViewColumn>
                <TableViewColumn Header="Efternamn" Binding="{Binding LastName}"></TableViewColumn>
                <TableViewColumn Header="Telefon" Binding="{Binding PhoneNumber}"></TableViewColumn>

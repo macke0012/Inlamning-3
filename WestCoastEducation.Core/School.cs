@@ -34,7 +34,7 @@ public class School
     
 
     public async Task<List<BaseCourse>> GetAllCourses() => await CourseService.GetAll();
-    public async Task<List<Teacher>> GetAllTeachers() => StaffService.Teachers;
+    public async Task<List<Teacher>> GetAllTeachers() => (await StaffService.GetAll()).OfType<Teacher>().ToList();
     public async Task<List<Student>> GetAllStudents() => await StudentService.GetAll();
     public async Task<List<BaseStaff>> GetAllStaff() => await StaffService.GetAll();
     
@@ -50,6 +50,8 @@ public class School
     public async Task UpdateEducationLeader(EducationLeader newLeaderData) => await StaffService.Update(newLeaderData);
     public async Task UpdateAdministrator(Administrator newAdminData) => await StaffService.Update(newAdminData);
     public async Task UpdateCourse(BaseCourse newBaseCourseData) => await CourseService.Update(newBaseCourseData);
+    
+    public async Task DeleteStaff(BaseStaff staff) => await StaffService.Delete(staff);
     
 
     public void AssignCourseToTeacher(Teacher teacher, TeacherLeadBaseCourse baseCourse)

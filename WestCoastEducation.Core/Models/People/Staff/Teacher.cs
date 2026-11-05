@@ -8,7 +8,8 @@ namespace WestCoastEducation.Core.Models.People.Staff;
 
 public class Teacher : BaseStaff
 {
-    private List<Competencies> _compentencies { get; set; }
+    
+    public List<Competencies> _compentencies { get; set; }
 
     public string KnowledgeArea
     {

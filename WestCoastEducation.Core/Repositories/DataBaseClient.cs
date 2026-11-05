@@ -62,7 +62,9 @@ public class DataBaseClient : IStorageProvider
 
     public async Task Delete<T>(string id)
     {
-        await Collection<T>().DeleteOneAsync(ById<T>(id));
+        
+        var result = await Collection<T>().DeleteOneAsync(ById<T>(id));
+        Console.WriteLine($"Deleted: {result.DeletedCount}");
     }
 
     public async Task<IChangeStreamCursor<ChangeStreamDocument<T>>> GetWatcher<T>()

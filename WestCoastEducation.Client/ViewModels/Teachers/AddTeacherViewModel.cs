@@ -1,9 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Material.Icons.Avalonia;
+using PleasantUI.Controls;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Enum;
 using WestCoastEducation.Core.Models;
@@ -33,6 +37,16 @@ public partial class AddTeacherViewModel(School school) : ViewModelBase(school)
     private void AddTeacher()
     {
         if(School is null) return;
+        if (FirstName == "" || LastName == "" || PhoneNumber == "")
+        {
+            PleasantSnackbar.Show(new PleasantSnackbarOptions("Förnamn, Efternamn och Telefon kan inte vara tomma.")
+            {
+                NotificationType = NotificationType.Error,
+            });
+
+            return;
+
+        }
         var teacher = new Teacher
         {
             FirstName = FirstName,
@@ -46,10 +60,16 @@ public partial class AddTeacherViewModel(School school) : ViewModelBase(school)
                 ZipCode = ZipCode,
                 Town = Town,
                 Country = Country
-            }
+            },
+            _compentencies = SelectedCompetencies.ToList()
+            
         };
 
         Task.Run(() => School.AddStaff(teacher)).Wait();
+        PleasantSnackbar.Show(new PleasantSnackbarOptions($"{FirstName} {LastName} har blivit tillagd som lärare.")
+        {
+            NotificationType = NotificationType.Success
+        });
         ClearFields();
     }
 
