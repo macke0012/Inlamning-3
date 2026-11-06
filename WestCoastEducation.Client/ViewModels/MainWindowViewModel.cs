@@ -40,14 +40,31 @@ public partial class MainWindowViewModel : ViewModelBase
     
     [RelayCommand]
     private void NavigateToTeachersPage() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.TEACHER);
+    
+    
 
     [RelayCommand]
     private void NavigateToAddTeacher() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.ADD_TEACHER);
     [RelayCommand]
+    private void NavigateToAddStudent() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.ADD_STUDENT);
+    [RelayCommand]
+    private void NavigateToAddCourse() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.ADD_COURSE);
+    
+    
+    [RelayCommand]
     private void NavigateToEditTeacher(Teacher teacher)
     {
         CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.EDIT_TEACHER);
-        (CurrentPage as EditTeacherViewModel).Init(teacher);
+        (CurrentPage as EditPersonViewModelBase).Init(teacher);
 
     }
+
+    [RelayCommand]
+    private void NavigateToEditStudent(Student student)
+    {
+        CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.EDIT_STUDENT);
+        (CurrentPage as EditPersonViewModelBase).Init(student);
+    }
+    
+  
 }

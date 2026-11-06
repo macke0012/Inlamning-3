@@ -12,7 +12,7 @@
     <Grid ColumnDefinitions="200, *">
 
         <!-- Sidebar: now stretches full height -->
-        <StackPanel Grid.Column="0" Background="{DynamicResource Surface}">
+        <StackPanel Grid.Column="0" Classes="menuContainer">
             <TextBlock Text="Westcoast Education"
                        FontSize="18"
                        HorizontalAlignment="Center"

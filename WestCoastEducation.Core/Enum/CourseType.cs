@@ -4,5 +4,4 @@ public enum CourseType
 {
     Remote,
     Classroom,
-    SelfPaced
 }

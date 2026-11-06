@@ -37,13 +37,9 @@ public partial class AddTeacherViewModel(School school) : ViewModelBase(school)
     private void AddTeacher()
     {
         if(School is null) return;
-        if (FirstName == "" || LastName == "" || PhoneNumber == "")
+        if (string.IsNullOrWhiteSpace(FirstName)|| string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(PhoneNumber))
         {
-            PleasantSnackbar.Show(new PleasantSnackbarOptions("Förnamn, Efternamn och Telefon kan inte vara tomma.")
-            {
-                NotificationType = NotificationType.Error,
-            });
-
+            ShowSnackbar("Förnamn, Efternamn och Telefon kan inte vara tomma.", NotificationType.Error);
             return;
 
         }
@@ -66,10 +62,7 @@ public partial class AddTeacherViewModel(School school) : ViewModelBase(school)
         };
 
         Task.Run(() => School.AddStaff(teacher)).Wait();
-        PleasantSnackbar.Show(new PleasantSnackbarOptions($"{FirstName} {LastName} har blivit tillagd som lärare.")
-        {
-            NotificationType = NotificationType.Success
-        });
+        ShowSnackbar($"{FirstName} {LastName} har blivit tillagd som lärare.", NotificationType.Success);
         ClearFields();
     }
 

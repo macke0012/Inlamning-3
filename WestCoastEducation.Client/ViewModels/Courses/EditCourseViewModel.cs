@@ -1,6 +1,6 @@
 namespace WestCoastEducation.Client.ViewModels.Courses;
 
-public class EditCourseViewModel
+public class EditCourseViewModel : ViewModelBase
 {
     
 }

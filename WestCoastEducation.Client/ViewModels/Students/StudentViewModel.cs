@@ -1,10 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using PleasantUI.Controls;
 using WestCoastEducation.Core;
+using WestCoastEducation.Core.Helpers;
 using WestCoastEducation.Core.Models.People;
 using WestCoastEducation.Core.Models.People.Staff;
 
@@ -12,20 +17,72 @@ namespace WestCoastEducation.Client.ViewModels.Students;
 
 public partial class StudentViewModel : ViewModelBase
 {
-    private readonly School _school;
+   
     [ObservableProperty] public partial ObservableCollection<Student> Students { get; set; } = [];
+
+    [ObservableProperty] public partial ObservableCollection<Student> SelectedStudents { get; set; } = [];
+    [ObservableProperty] public partial bool IsEditable { get; set; }
+
     
-    public StudentViewModel(School school)
+
+
+    public StudentViewModel(School school) : base(school)
     {
-        _school = school;
+        
         Init();
+        //Updatera bool värdet, om bara en elev är vald, kan man redigera den
+        SelectedStudents.CollectionChanged += (sender, args) =>
+        {
+            IsEditable = SelectedStudents.Count == 1;
+        };
     }
 
     public async Task Init()
     {
-        List<Student> students = await _school.GetAllStudents();
+        List<Student> students = await School.GetAllStudents();
         Console.WriteLine(students.Count);
         Students = new ObservableCollection<Student>(students);
+       
+    }
+    
+    [RelayCommand]
+    private async Task DeleteStudents(Collection<Student> students)
+    {
+        SetShowPopUp();
+        if (students.Count == 0) return;
+        SetShowSpinner("Tar bort elever...");
+        foreach (var student in students)
+        {
+            await School.DeleteStudent(student);
+        }
+        SetShowSpinner();
+        await Init();
+        SelectedStudents.Clear();
+        ShowSnackbar("Elever borttagna!",NotificationType.Success);
+        
+
+    }
+
+    [RelayCommand]
+    private async Task DeleteSelectedStudents()
+    {
+        /*SetShowSpinner("Tar bort elever...");
+        var studentstoDelete = Students.Where(s => s._isSelected);
+        foreach (var student in studentstoDelete)
+        {
+            await School.DeleteStudent(student._object);
+        }
+        SetShowSpinner();*/
+    }
+
+    [RelayCommand]
+    private async Task GenerateStudent()
+    {
+        var gen = new RandomDataGenerator();
+        var students = gen.CreateStudents(5);
+        students.ForEach(s => School.AddStudent(s));
+        await Init();
+        
     }
     
 }

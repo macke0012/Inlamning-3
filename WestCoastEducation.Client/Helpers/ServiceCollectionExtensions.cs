@@ -10,6 +10,7 @@ using WestCoastEducation.Client.Enums;
 using WestCoastEducation.Client.ViewModels.Courses;
 using WestCoastEducation.Client.ViewModels.Students;
 using WestCoastEducation.Client.ViewModels.Teachers;
+using WestCoastEducation.Client.Views.Students;
 
 
 namespace WestCoastEducation.Client.Helpers;
@@ -20,19 +21,32 @@ public static class ServiceCollectionExtensions
     // i ServiceCollection objektet. Som vi fått via Microsoft.Extensions.DependencyInjection...
     public static void AddServices(this IServiceCollection collection)
     {
-        // Om någon efterfrågar interface IProductService så ger
-        // vi dem en instans av KalleAnka objektet...
-        collection.AddSingleton<MainWindowViewModel>();
+        //PageViewFactory
         collection.AddSingleton<PageViewFactory>();
+        
+        //Main Viewmodels
+        collection.AddSingleton<MainWindowViewModel>();
         collection.AddTransient<HomeViewModel>();
+        
+        //View Data Models
         collection.AddTransient<CourseViewModel>();
         collection.AddTransient<TeacherViewModel>();
         collection.AddTransient<StudentViewModel>();
+        
+        //Add data models
         collection.AddTransient<AddTeacherViewModel>();
+        collection.AddTransient<AddStudentViewModel>();
+        collection.AddTransient<AddCourseViewModel>();
+        
+        //Edit data models
         collection.AddTransient<EditTeacherViewModel>();
+        collection.AddTransient<EditStudentViewModel>();
+        collection.AddTransient<EditCourseViewModel>();
+        
+        //Repository
         collection.AddSingleton<IStorageProvider, DataBaseClient>();
         
-
+        //Backend Services
         collection.AddSingleton<StaffService>();
         collection.AddSingleton<StudentService>();
         collection.AddSingleton<CourseService>();
@@ -41,11 +55,18 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<Func<PageViewsEnum, ViewModelBase>>(c => name => name switch
         {
             PageViewsEnum.HOME => c.GetRequiredService<HomeViewModel>(),
+            
             PageViewsEnum.COURSES => c.GetRequiredService<CourseViewModel>(),
             PageViewsEnum.TEACHER => c.GetRequiredService<TeacherViewModel>(),
             PageViewsEnum.STUDENT => c.GetRequiredService<StudentViewModel>(),
+            
             PageViewsEnum.ADD_TEACHER => c.GetRequiredService<AddTeacherViewModel>(),
+            PageViewsEnum.ADD_STUDENT => c.GetRequiredService<AddStudentViewModel>(),
+            PageViewsEnum.ADD_COURSE => c.GetRequiredService<AddCourseViewModel>(),
+            
             PageViewsEnum.EDIT_TEACHER => c.GetRequiredService<EditTeacherViewModel>(),
+            PageViewsEnum.EDIT_STUDENT => c.GetRequiredService<EditStudentViewModel>(),
+            PageViewsEnum.EDIT_COURSE => c.GetRequiredService<EditCourseViewModel>(),
             _ => throw new InvalidOperationException()
         });
 

@@ -1,8 +1,6 @@
-using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
 
-namespace WestCoastEducation.Client.Views;
+namespace WestCoastEducation.Client.Views.Courses;
 
 public partial class CourseView : UserControl
 {

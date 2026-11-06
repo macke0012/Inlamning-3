@@ -9,14 +9,14 @@ namespace WestCoastEducation.Core.Models.People.Staff;
 public class Teacher : BaseStaff
 {
     
-    public List<Competencies> _compentencies { get; set; }
+    public List<Competencies> CompetenciesList { get; set; }
 
     public string KnowledgeArea
     {
         get
         {
             string value = "";
-            foreach (var comp in _compentencies) value += comp.ToString() + "\n";
+            foreach (var comp in CompetenciesList) value += comp.ToString() + "\n";
             return value;
         }
     }
@@ -39,7 +39,7 @@ public class Teacher : BaseStaff
     
     public void AddCompetencies(params List<Competencies> competencies)
     {
-        _compentencies.AddRange(competencies);
+        CompetenciesList.AddRange(competencies);
     }
 
     public void RemoveCourse(BaseCourse baseCourse)

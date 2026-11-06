@@ -7,7 +7,7 @@ namespace WestCoastEducation.Core.Models.Course;
 [JsonDerivedType(typeof(RemoteCourse), "remote")]
 [JsonDerivedType(typeof(ClassroomCourse), "classroom")]
 [BsonDiscriminator(RootClass = true)]
-[BsonKnownTypes(typeof(RemoteCourse), typeof(ClassroomCourse))]//Detta så att json serialization ska veta vilken typ av kurs det är när man deserialiserar.
+[BsonKnownTypes(typeof(RemoteCourse), typeof(ClassroomCourse))]
 
 public abstract class BaseCourse : IStorageObject
 {

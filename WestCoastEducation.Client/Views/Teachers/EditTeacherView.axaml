@@ -67,7 +67,7 @@
                     ItemsSource="{Binding Countries}">
                 </ComboBox>
             </StackPanel>
-            <Button Margin="0,20" Content="Spara Lärare" Command="{Binding EditTeacherCommand}"></Button>
+            <Button Margin="0,20" Content="Spara Lärare" Command="{Binding EditPersonCommand}"></Button>
         </StackPanel>
     </ScrollViewer>
 </UserControl>

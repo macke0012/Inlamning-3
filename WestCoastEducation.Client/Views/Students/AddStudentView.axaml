@@ -2,7 +2,52 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:student="clr-namespace:WestCoastEducation.Client.ViewModels.Students"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="student:AddStudentViewModel"
              x:Class="WestCoastEducation.Client.Views.Students.AddStudentView">
-    Welcome to Avalonia!
+    <ScrollViewer>
+        <StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Förnamn"></Label>
+                <TextBox Text="{Binding FirstName}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Efternamn"></Label>
+                <TextBox Text="{Binding LastName}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Telefon"></Label>
+                <TextBox Text="{Binding PhoneNumber}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Personnummer"></Label>
+                <TextBox Text="{Binding SSN}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Email"></Label>
+                <TextBox Text="{Binding Email}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Gata"></Label>
+                <TextBox Text="{Binding Street}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Postnummer"></Label>
+                <TextBox Text="{Binding ZipCode}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Stad"></Label>
+                <TextBox Text="{Binding Town}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Land"></Label>
+                <ComboBox
+                    SelectedItem="{Binding Country}"
+                    ItemsSource="{Binding Countries}">
+                </ComboBox>
+            </StackPanel>
+            <Button Margin="0,20" Content="Spara Student" Command="{Binding AddStudentCommand}"></Button>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

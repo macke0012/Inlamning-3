@@ -30,5 +30,6 @@
                  <SolidColorBrush x:Key="Success">#FF5DE0B2</SolidColorBrush>
                  <SolidColorBrush x:Key="Warning">#FFFFC66D</SolidColorBrush>
                  <SolidColorBrush x:Key="Danger">#FFFF7185</SolidColorBrush>
+                 <SolidColorBrush x:Key="Overlay">#99000000</SolidColorBrush>
              </Application.Resources>
 </Application>

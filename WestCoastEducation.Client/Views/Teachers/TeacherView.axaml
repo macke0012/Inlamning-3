@@ -21,7 +21,6 @@
            </TableView.ContextMenu>
            
            <TableView.Columns>
-               
                <TableViewColumn Header="Förnamn" Binding="{Binding FirstName}"></TableViewColumn>
                <TableViewColumn Header="Efternamn" Binding="{Binding LastName}"></TableViewColumn>
                <TableViewColumn Header="Telefon" Binding="{Binding PhoneNumber}"></TableViewColumn>
