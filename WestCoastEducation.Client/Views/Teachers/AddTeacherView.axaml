@@ -24,11 +24,6 @@
                                            EmptyMessage="No Competency"
                                            Width="400"
                                            MaxHeight="300">
-                                <SelectionList.ImageTemplate>
-                                    <DataTemplate DataType="enum:Competencies">
-
-                                    </DataTemplate>
-                                </SelectionList.ImageTemplate>
                             </SelectionList>
                         </Flyout>
                     </Button.Flyout>

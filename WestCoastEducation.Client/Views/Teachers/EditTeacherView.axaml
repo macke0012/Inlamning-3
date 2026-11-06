@@ -2,7 +2,72 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:enum="clr-namespace:WestCoastEducation.Core.Enum;assembly=WestCoastEducationCore"
+             xmlns:vm="clr-namespace:WestCoastEducation.Client.ViewModels.Teachers"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="vm:EditTeacherViewModel"
              x:Class="WestCoastEducation.Client.Views.Teachers.EditTeacherView">
-    <PleasantSnackbar ></PleasantSnackbar>
+    <ScrollViewer>
+        <StackPanel>
+            <StackPanel Classes="inputPanel">
+
+                <Label Content="Kompetenser" />
+                <Button Content="Competencies"
+                        HorizontalAlignment="Stretch"
+                        HorizontalContentAlignment="Left">
+                    <Button.Flyout>
+                        <Flyout Placement="BottomEdgeAlignedLeft">
+                            <SelectionList ItemsSource="{Binding Competencies}"
+                                           SelectedItems="{Binding SelectedCompetencies}"
+                                           TitleMemberBinding="{Binding}"
+                                           EmptyMessage="No Competency"
+                                           Width="400"
+                                           MaxHeight="300">
+                            </SelectionList>
+                        </Flyout>
+                    </Button.Flyout>
+                </Button>
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Förnamn"></Label>
+                <TextBox Text="{Binding FirstName}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Efternamn"></Label>
+                <TextBox Text="{Binding LastName}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Telefon"></Label>
+                <TextBox Text="{Binding PhoneNumber}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Personnummer"></Label>
+                <TextBox Text="{Binding SSN}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Email"></Label>
+                <TextBox Text="{Binding Email}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Gata"></Label>
+                <TextBox Text="{Binding Street}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Postnummer"></Label>
+                <TextBox Text="{Binding ZipCode}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Stad"></Label>
+                <TextBox Text="{Binding Town}" />
+            </StackPanel>
+            <StackPanel Classes="inputPanel">
+                <Label Content="Land"></Label>
+                <ComboBox
+                    SelectedItem="{Binding Country}"
+                    ItemsSource="{Binding Countries}">
+                </ComboBox>
+            </StackPanel>
+            <Button Margin="0,20" Content="Spara Lärare" Command="{Binding EditTeacherCommand}"></Button>
+        </StackPanel>
+    </ScrollViewer>
 </UserControl>

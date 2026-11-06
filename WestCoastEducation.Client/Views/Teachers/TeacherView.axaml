@@ -15,7 +15,8 @@
        <TableView Grid.Row="1" ItemsSource="{Binding Teachers}" SelectedItem="{Binding SelectedTeacher}">
            <TableView.ContextMenu>
                <ContextMenu>
-                   <MenuItem Command="{Binding DeleteTeacherCommand}" CommandParameter="{Binding SelectedTeacher}"></MenuItem>
+                   <MenuItem Header="Delete" Command="{Binding DeleteTeacherCommand}" CommandParameter="{Binding SelectedTeacher}"></MenuItem>
+                   <MenuItem Header="Edit" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToEditTeacherCommand}" CommandParameter="{Binding SelectedTeacher}" ></MenuItem>
                </ContextMenu>
            </TableView.ContextMenu>
            
@@ -30,5 +31,4 @@
            </TableView.Columns>
        </TableView>
    </Grid>
-    
 </UserControl>

@@ -15,6 +15,7 @@ namespace WestCoastEducation.Client.ViewModels.Teachers;
 
 public partial class EditTeacherViewModel(School school) : ViewModelBase(school)
 {
+    Teacher _teacher;
     [ObservableProperty] public partial string FirstName { get; set; } = "";
     [ObservableProperty] public partial string LastName { get; set; } = "";
     [ObservableProperty] public partial string Email { get; set; } = "";
@@ -28,33 +29,39 @@ public partial class EditTeacherViewModel(School school) : ViewModelBase(school)
     public Country[] Countries { get; } = Enum.GetValues<Country>();
     public Competencies[] Competencies { get; } = Enum.GetValues<Competencies>();
 
-    [ObservableProperty] public partial bool ShowSnackBar { get; set; } = false;
-    
-
+    public void Init(Teacher teacher)
+    {
+        _teacher = teacher;
+        
+        FirstName = teacher.FirstName;
+        LastName = teacher.LastName;
+        Email = teacher.Email;
+        PhoneNumber = teacher.PhoneNumber;
+        SSN = teacher.SSN;
+        Street = teacher.Address.Street;
+        ZipCode = teacher.Address.ZipCode;
+        Town = teacher.Address.Town;
+        Country = teacher.Address.Country;
+        SelectedCompetencies = new ObservableCollection<Competencies>(teacher.CompetenciesList ?? []);
+    }
 
     [RelayCommand]
     private void EditTeacher()
     {
-        if(School is null) return;
-        var teacher = new Teacher
-        {
-            FirstName = FirstName,
-            LastName = LastName,
-            SSN = SSN,
-            Email = Email,
-            PhoneNumber = PhoneNumber,
-            Address = new Address
-            {
-                Street = Street,
-                ZipCode = ZipCode,
-                Town = Town,
-                Country = Country
-            },
-            _compentencies = SelectedCompetencies.ToList()
-            
-        };
+        if (School is null) return;
+        _teacher.FirstName = FirstName;
+        _teacher.LastName = LastName;
+        _teacher.Email = Email;
+        _teacher.PhoneNumber = PhoneNumber;
+        _teacher.SSN = SSN;
+        _teacher.Address.Street = Street;
+        _teacher.Address.ZipCode = ZipCode;
+        _teacher.Address.Town = Town;
+        _teacher.Address.Country = Country;
+        _teacher.CompetenciesList = SelectedCompetencies.ToList();
+        
 
-        Task.Run(() => School.AddStaff(teacher)).Wait();
+        Task.Run(() => School.UpdateTeacher(_teacher)).Wait();
         PleasantSnackbar.Show(new PleasantSnackbarOptions("Teacher Edited!"));
         ClearFields();
     }
@@ -71,5 +78,4 @@ public partial class EditTeacherViewModel(School school) : ViewModelBase(school)
         Town = "";
         Country = Country.Sweden;
     }
-    
 }

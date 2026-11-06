@@ -29,6 +29,7 @@ public static class ServiceCollectionExtensions
         collection.AddTransient<TeacherViewModel>();
         collection.AddTransient<StudentViewModel>();
         collection.AddTransient<AddTeacherViewModel>();
+        collection.AddTransient<EditTeacherViewModel>();
         collection.AddSingleton<IStorageProvider, DataBaseClient>();
         
 
@@ -44,6 +45,7 @@ public static class ServiceCollectionExtensions
             PageViewsEnum.TEACHER => c.GetRequiredService<TeacherViewModel>(),
             PageViewsEnum.STUDENT => c.GetRequiredService<StudentViewModel>(),
             PageViewsEnum.ADD_TEACHER => c.GetRequiredService<AddTeacherViewModel>(),
+            PageViewsEnum.EDIT_TEACHER => c.GetRequiredService<EditTeacherViewModel>(),
             _ => throw new InvalidOperationException()
         });
 

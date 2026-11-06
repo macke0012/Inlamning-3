@@ -61,7 +61,7 @@ public partial class AddTeacherViewModel(School school) : ViewModelBase(school)
                 Town = Town,
                 Country = Country
             },
-            _compentencies = SelectedCompetencies.ToList()
+            CompetenciesList = SelectedCompetencies.ToList()
             
         };
 

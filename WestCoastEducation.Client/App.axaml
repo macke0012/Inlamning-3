@@ -12,7 +12,7 @@
     <Application.Styles>
         <PleasantTheme />
         <FluentTheme />
-        <StyleInclude Source="Assets/AppStyles.axaml"></StyleInclude>
+        <StyleInclude Source="/Assets/Styles/AppStyles.axaml"></StyleInclude>
     </Application.Styles>
              
              <Application.Resources>

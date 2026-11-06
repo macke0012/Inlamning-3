@@ -5,8 +5,10 @@ using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using WestCoastEducation.Client.Enums;
 using WestCoastEducation.Client.Factories;
+using WestCoastEducation.Client.ViewModels.Teachers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Models.People;
+using WestCoastEducation.Core.Models.People.Staff;
 
 
 namespace WestCoastEducation.Client.ViewModels;
@@ -41,7 +43,11 @@ public partial class MainWindowViewModel : ViewModelBase
 
     [RelayCommand]
     private void NavigateToAddTeacher() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.ADD_TEACHER);
+    [RelayCommand]
+    private void NavigateToEditTeacher(Teacher teacher)
+    {
+        CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.EDIT_TEACHER);
+        (CurrentPage as EditTeacherViewModel).Init(teacher);
 
-
-
+    }
 }

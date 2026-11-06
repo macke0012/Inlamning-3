@@ -40,4 +40,6 @@ public partial class TeacherViewModel : ViewModelBase
         PleasantSnackbar.Show(new PleasantSnackbarOptions("Teacher deleted!"));
         await Init();
     }
+
+    
 }

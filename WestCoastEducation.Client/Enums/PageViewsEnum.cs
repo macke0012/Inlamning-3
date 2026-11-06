@@ -9,6 +9,9 @@ public enum PageViewsEnum
     ADD_TEACHER,
     ADD_STUDENT,
     ADD_COURSE,
+    EDIT_COURSE,
+    EDIT_TEACHER,
+    EDIT_STUDENT,
     
     
 }
