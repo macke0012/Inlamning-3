@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Enum;
 using WestCoastEducation.Core.Models.People;
@@ -11,7 +12,7 @@ using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels;
 
-public abstract partial class EditPersonViewModelBase(School school) : ViewModelBase(school)
+public abstract partial class EditPersonViewModelBase(School school, NavigateBack nb) : ViewModelBase(school, nb)
 {
     protected Person _person;
     [ObservableProperty] public partial string FirstName { get; set; } = "";

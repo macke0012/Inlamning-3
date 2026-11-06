@@ -4,6 +4,7 @@ using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PleasantUI.Controls;
+using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Models;
 using WestCoastEducation.Core.Models.People;
@@ -11,7 +12,7 @@ using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels.Students;
 
-public partial class AddStudentViewModel(School school) : ViewModelBase(school)
+public partial class AddStudentViewModel(School school, NavigateBack navigateBack) : ViewModelBase(school, navigateBack)
 {
     [ObservableProperty] public partial string FirstName { get; set; } = "";
     [ObservableProperty] public partial string LastName { get; set; } = "";
@@ -56,7 +57,7 @@ public partial class AddStudentViewModel(School school) : ViewModelBase(school)
 
         Task.Run(() => School.AddStudent(student)).Wait();
         ShowSnackbar($"{FirstName} {LastName} har blivit tillagd som student.", NotificationType.Success);
-        ClearFields();
+        NavigateBack?.Invoke();
     }
 
     private void ClearFields()

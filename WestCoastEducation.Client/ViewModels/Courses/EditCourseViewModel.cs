@@ -36,14 +36,14 @@ public partial class EditCourseViewModel : ViewModelBase
     public Platform[] Platforms { get; } = Enum.GetValues<Platform>();
     [ObservableProperty] public partial string MeetingLink { get; set; }
     
-    private NavigateBack _goback { get; set; }
+    
     
     public bool IsRemoteCourse => CourseType == CourseType.Remote;
     public bool IsClassroomCourse => CourseType == CourseType.Classroom;
 
-    public EditCourseViewModel(School school, NavigateBack goback) : base(school)
+    public EditCourseViewModel(School school, NavigateBack navigateBack) : base(school, navigateBack)
     {
-        _goback = goback;
+        
     }
     
     //So that the view updates the inputs when the course type changes
@@ -105,7 +105,7 @@ public partial class EditCourseViewModel : ViewModelBase
         await School!.UpdateCourse(courseToAdd);
         SetShowSpinner();
         ShowSnackbar("Kursen blev uppdaterad!", NotificationType.Success);
-        _goback.Invoke();
+        NavigateBack?.Invoke();
     }
 
     private ClassroomCourse CreateClassroomCourse()

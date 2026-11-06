@@ -48,7 +48,8 @@ public static class ServiceCollectionExtensions
         collection.AddSingleton<IStorageProvider, DataBaseClient>();
         
         //Navigation Helper
-        collection.AddSingleton<NavigateBack>(c => () => c.GetRequiredService<MainWindowViewModel>().NavigateBack());
+        collection.AddSingleton<NavigateBack>(c => 
+            () => c.GetRequiredService<MainWindowViewModel>().NavigateBack());
         
         //Backend Services
         collection.AddSingleton<StaffService>();

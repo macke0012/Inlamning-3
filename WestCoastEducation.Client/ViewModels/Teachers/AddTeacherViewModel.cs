@@ -8,6 +8,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Material.Icons.Avalonia;
 using PleasantUI.Controls;
+using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Enum;
 using WestCoastEducation.Core.Models;
@@ -15,7 +16,7 @@ using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels.Teachers;
 
-public partial class AddTeacherViewModel(School school) : ViewModelBase(school)
+public partial class AddTeacherViewModel(School school, NavigateBack nb) : ViewModelBase(school, nb)
 {
     [ObservableProperty] public partial string FirstName { get; set; } = "";
     [ObservableProperty] public partial string LastName { get; set; } = "";
@@ -63,7 +64,7 @@ public partial class AddTeacherViewModel(School school) : ViewModelBase(school)
 
         Task.Run(() => School.AddStaff(teacher)).Wait();
         ShowSnackbar($"{FirstName} {LastName} har blivit tillagd som lärare.", NotificationType.Success);
-        ClearFields();
+       NavigateBack?.Invoke();
     }
 
     private void ClearFields()

@@ -7,6 +7,7 @@ using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PleasantUI.Controls;
+using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Enum;
 using WestCoastEducation.Core.Models;
@@ -15,7 +16,7 @@ using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels.Teachers;
 
-public partial class EditTeacherViewModel(School school) : EditPersonViewModelBase(school)
+public partial class EditTeacherViewModel(School school, NavigateBack nb) : EditPersonViewModelBase(school, nb)
 {
 
     [ObservableProperty] public partial ObservableCollection<Competencies> SelectedCompetencies { get; set; } = [];
@@ -35,7 +36,7 @@ public partial class EditTeacherViewModel(School school) : EditPersonViewModelBa
         (_person as Teacher).CompetenciesList = SelectedCompetencies.ToList();
         Task.Run(() => School.UpdateTeacher(_person as Teacher)).Wait();
         ShowSnackbar("Läraren har redigerats", NotificationType.Success);
-        ClearFields();
+        NavigateBack?.Invoke();
         
     }
 

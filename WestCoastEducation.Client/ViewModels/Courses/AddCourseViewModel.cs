@@ -1,8 +1,11 @@
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using WestCoastEducation.Client.Helpers;
+using WestCoastEducation.Core;
 using WestCoastEducation.Core.Models;
 using WestCoastEducation.Core.Models.Course;
 
@@ -35,6 +38,11 @@ public partial class AddCourseViewModel : ViewModelBase
     public bool IsRemoteCourse => CourseType == CourseType.Remote;
     public bool IsClassroomCourse => CourseType == CourseType.Classroom;
 
+    public AddCourseViewModel(School school, NavigateBack navigateBack): base(school, navigateBack)
+    {
+        
+    }
+    
     //So that the view updates the inputs when the course type changes
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
@@ -62,6 +70,8 @@ public partial class AddCourseViewModel : ViewModelBase
                 throw new ArgumentOutOfRangeException();
         }
         School.AddCourse(courseToAdd);
+        ShowSnackbar("Kursen har blivit tillagd!", NotificationType.Success);
+        NavigateBack?.Invoke();
     }
 
     private ClassroomCourse CreateClassroomCourse()

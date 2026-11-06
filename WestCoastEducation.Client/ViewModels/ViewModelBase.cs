@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using PleasantUI.Controls;
+using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Interfaces;
 using WestCoastEducation.Core.Models.People.Staff;
@@ -21,9 +22,12 @@ public partial class ViewModelBase : ObservableObject
     [ObservableProperty] public partial string SpinnerText { get; set; } = "";
     protected readonly School? School;
     
-    public ViewModelBase(School school)
+    protected readonly NavigateBack? NavigateBack;
+    
+    public ViewModelBase(School school, NavigateBack? navigateBack = null)
     {
         School = school;
+        NavigateBack = navigateBack;
     }
 
     public ViewModelBase(){}
