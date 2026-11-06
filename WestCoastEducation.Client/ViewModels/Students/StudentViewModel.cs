@@ -64,18 +64,6 @@ public partial class StudentViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task DeleteSelectedStudents()
-    {
-        /*SetShowSpinner("Tar bort elever...");
-        var studentstoDelete = Students.Where(s => s._isSelected);
-        foreach (var student in studentstoDelete)
-        {
-            await School.DeleteStudent(student._object);
-        }
-        SetShowSpinner();*/
-    }
-
-    [RelayCommand]
     private async Task GenerateStudent()
     {
         var gen = new RandomDataGenerator();

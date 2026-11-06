@@ -11,8 +11,9 @@
 
     <Grid ColumnDefinitions="200, *">
 
-        <!-- Sidebar: now stretches full height -->
-        <StackPanel Grid.Column="0" Classes="menuContainer">
+        <Border Classes="menuContainer">
+            
+        <StackPanel Grid.Column="0">
             <TextBlock Text="Westcoast Education"
                        FontSize="18"
                        HorizontalAlignment="Center"
@@ -41,6 +42,8 @@
                 <TextBlock Text="Courses" />
             </Button>
         </StackPanel>
+        </Border>
+        
 
         <!-- Page host -->
         <ContentControl Grid.Column="1" Content="{Binding CurrentPage}" />

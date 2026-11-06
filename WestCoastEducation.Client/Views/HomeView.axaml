@@ -5,11 +5,28 @@
              xmlns:viewModels="clr-namespace:WestCoastEducation.Client.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="WestCoastEducation.Client.Views.HomeView"
-             x:DataType="viewModels:HomeViewModel"
-             >
-    <Grid ColumnDefinitions="*,*,*" HorizontalAlignment="Stretch">
-        <TextBlock HorizontalAlignment="Center"  Text="Staff: 0"></TextBlock>
-        <TextBlock HorizontalAlignment="Center" Grid.Column="1" Text="Courses: 0"></TextBlock>
-        <TextBlock HorizontalAlignment="Center" Grid.Column="2" Text="Students: 0"></TextBlock>
+             x:DataType="viewModels:HomeViewModel">
+
+
+    <Grid ColumnDefinitions="*,*,*" HorizontalAlignment="Stretch" ColumnSpacing="10">
+        <Border Classes="infoCard" >
+            <StackPanel >
+                <TextBlock Text="Lärare"></TextBlock>
+                <TextBlock Text="{Binding Teachers.Count}"></TextBlock>
+            </StackPanel>
+        </Border>
+        <Border Grid.Column="1" Classes="infoCard">
+            <StackPanel>
+                <TextBlock Text="Studenter"></TextBlock>
+                <TextBlock Text="{Binding Students.Count}"></TextBlock>
+            </StackPanel>
+        </Border>
+        <Border Grid.Column="2" Classes="infoCard">
+            <StackPanel>
+                <TextBlock Text="Kurser"></TextBlock>
+                <TextBlock Text="{Binding Courses.Count}"></TextBlock>
+            </StackPanel>
+        </Border>
+       
     </Grid>
 </UserControl>

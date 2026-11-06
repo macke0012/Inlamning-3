@@ -2,10 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PleasantUI.Controls;
 using WestCoastEducation.Core;
+using WestCoastEducation.Core.Helpers;
 using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels.Teachers;
@@ -14,14 +16,18 @@ public partial class TeacherViewModel : ViewModelBase
 {
     
     [ObservableProperty] public partial ObservableCollection<Teacher> Teachers { get; set; } = [];
-    [ObservableProperty] public partial Teacher SelectedTeacher { get; set; }
-    
+    [ObservableProperty] public partial ObservableCollection<Teacher> SelectedTeachers { get; set; } = [];
+    [ObservableProperty] public partial bool IsEditable { get; set; } = false;
     
     
     public TeacherViewModel(School school) : base(school)
     {
         
         Init();
+        SelectedTeachers.CollectionChanged += (sender, args) =>
+        {
+            IsEditable = SelectedTeachers.Count == 1;
+        };
     }
 
     public async Task Init()
@@ -32,13 +38,33 @@ public partial class TeacherViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private async Task DeleteTeacher(Teacher obj)
+    private async Task DeleteTeachers(Collection<Teacher> teachers)
     {
-        if (obj is null) return;
-        Console.WriteLine("Deleting: " + obj.FirstName + " " + obj.LastName);
-        await School.DeleteStaff(obj);
-        PleasantSnackbar.Show(new PleasantSnackbarOptions("Teacher deleted!"));
+        SetShowPopUp();
+        if (teachers.Count == 0) return;
+        SetShowSpinner("Tar bort lärare...");
+        foreach (var teacher in teachers)
+        {
+            await School.DeleteStaff(teacher);
+        }
+        SetShowSpinner();
         await Init();
+        SelectedTeachers.Clear();
+        ShowSnackbar("Lärare borttagna!",NotificationType.Success);
+        
+
+    }
+    
+    [RelayCommand]
+    private async Task GenerateTeacher()
+    {
+        SetShowSpinner("Genererar Lärare...");
+        var gen = new RandomDataGenerator();
+        var teachers = gen.CreateTeachers(5);
+        teachers.ForEach(t => School.AddStaff(t));
+        await Init();
+        SetShowSpinner();
+        
     }
 
     
