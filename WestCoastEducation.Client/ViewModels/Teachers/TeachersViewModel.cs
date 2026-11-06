@@ -12,7 +12,7 @@ using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels.Teachers;
 
-public partial class TeacherViewModel : ViewModelBase
+public partial class TeachersViewModel : ViewModelBase
 {
     
     [ObservableProperty] public partial ObservableCollection<Teacher> Teachers { get; set; } = [];
@@ -20,7 +20,7 @@ public partial class TeacherViewModel : ViewModelBase
     [ObservableProperty] public partial bool IsEditable { get; set; } = false;
     
     
-    public TeacherViewModel(School school) : base(school)
+    public TeachersViewModel(School school) : base(school)
     {
         
         Init();

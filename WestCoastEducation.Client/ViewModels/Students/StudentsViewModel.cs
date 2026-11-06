@@ -15,7 +15,7 @@ using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels.Students;
 
-public partial class StudentViewModel : ViewModelBase
+public partial class StudentsViewModel : ViewModelBase
 {
    
     [ObservableProperty] public partial ObservableCollection<Student> Students { get; set; } = [];
@@ -26,7 +26,7 @@ public partial class StudentViewModel : ViewModelBase
     
 
 
-    public StudentViewModel(School school) : base(school)
+    public StudentsViewModel(School school) : base(school)
     {
         
         Init();

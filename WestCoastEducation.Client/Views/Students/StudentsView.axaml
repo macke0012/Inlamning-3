@@ -2,35 +2,37 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:WestCoastEducation.Client.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             xmlns:teachers="clr-namespace:WestCoastEducation.Client.ViewModels.Teachers"
-             xmlns:vm="using:WestCoastEducation.Client.ViewModels"
-             x:DataType="teachers:TeacherViewModel"
-             x:Class="WestCoastEducation.Client.Views.Teachers.TeacherView">
-   <Grid RowDefinitions="Auto,*">
-       <StackPanel Orientation="Horizontal">
-           <Button Content="Skapa lärare"
-                   Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToAddTeacherCommand}"/>
-           <Button Content="Generera 5 Lärare" Command="{Binding GenerateTeacherCommand}"/>
-       </StackPanel>
-       <TableView Grid.Row="1" SelectionMode="Multiple" ItemsSource="{Binding Teachers}" SelectedItems="{Binding SelectedTeachers}">
-           <TableView.ContextMenu>
-               <ContextMenu>
-                   <MenuItem Header="Delete" Command="{Binding SetShowPopUpCommand}" CommandParameter="Är du säker på att du vill radera dessa lärare?"></MenuItem>
-                   <MenuItem IsEnabled="{Binding IsEditable}" Header="Edit" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToEditTeacherCommand}" CommandParameter="{Binding SelectedTeachers[0]}" ></MenuItem>
-               </ContextMenu>
-           </TableView.ContextMenu>
-           
-           <TableView.Columns>
-               <TableViewColumn Header="Förnamn" Binding="{Binding FirstName}"></TableViewColumn>
-               <TableViewColumn Header="Efternamn" Binding="{Binding LastName}"></TableViewColumn>
-               <TableViewColumn Header="Telefon" Binding="{Binding PhoneNumber}"></TableViewColumn>
-               <TableViewColumn Header="E-post" Binding="{Binding Email}"></TableViewColumn>
-               <TableViewColumn Header="Personnummer" Binding="{Binding SSN}"></TableViewColumn>
-               <TableViewColumn Header="Kompetenser" Binding="{Binding KnowledgeArea}"></TableViewColumn>
-           </TableView.Columns>
-       </TableView>
-       <Panel Grid.RowSpan="2"
+             xmlns:teachers="clr-namespace:WestCoastEducation.Client.ViewModels.Students"
+             x:DataType="teachers:StudentsViewModel"
+             x:Class="WestCoastEducation.Client.Views.Students.StudentsView">
+    <Grid RowDefinitions="Auto, *">
+        <StackPanel Orientation="Horizontal" Spacing="5" Margin="5">
+            <Button Content="Skapa student"
+                    Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToAddStudentCommand}" />
+            <Button Content="Generera 5 Studenter" Command="{Binding GenerateStudentCommand}"></Button>
+        </StackPanel>
+        <TableView Grid.Row="1" ItemsSource="{Binding Students}" 
+                   SelectedItems="{Binding SelectedStudents}" 
+                   SelectionMode="Multiple"
+                   >
+            <TableView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete" Command="{Binding SetShowPopUpCommand}" CommandParameter="Är du säker på att du vill radera de valda studenterna?"></MenuItem>
+                    <MenuItem IsEnabled="{Binding IsEditable}" Header="Edit" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToEditStudentCommand}" CommandParameter="{Binding SelectedStudents[0]}" ></MenuItem>
+                </ContextMenu>
+            </TableView.ContextMenu>
+            <TableView.Columns>
+                <TableViewColumn Header="Förnamn" Binding="{Binding FirstName}"></TableViewColumn>
+                <TableViewColumn Header="Efternamn" Binding="{Binding LastName}"></TableViewColumn>
+                <TableViewColumn Header="Telefon" Binding="{Binding PhoneNumber}"></TableViewColumn>
+                <TableViewColumn Header="E-post" Binding="{Binding Email}"></TableViewColumn>
+                <TableViewColumn Header="Personnummer" Binding="{Binding SSN}"></TableViewColumn>
+                <TableViewColumn Header="Kurser" Binding="{Binding CoursesNames}"></TableViewColumn>
+            </TableView.Columns>
+        </TableView>
+        <Panel Grid.RowSpan="2"
                Background="{DynamicResource Overlay}"
                IsVisible="{Binding ShowPopUp}">
             <!-- The dialog box, centered -->
@@ -49,8 +51,8 @@
                                 HorizontalContentAlignment="Center"
                                 Background="{DynamicResource Danger}"
                                 Content="Ja"
-                                Command="{Binding DeleteTeachersCommand}"
-                                CommandParameter="{Binding SelectedTeachers}"
+                                Command="{Binding DeleteStudentsCommand}"
+                                CommandParameter="{Binding SelectedStudents}"
                         />
                         <Button Grid.Column="1"
                                 HorizontalAlignment="Stretch"
@@ -79,5 +81,5 @@
                 </StackPanel>
             </Border>
         </Panel>
-   </Grid>
+    </Grid>
 </UserControl>

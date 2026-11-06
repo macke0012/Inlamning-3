@@ -8,22 +8,25 @@
              x:DataType="viewModels:HomeViewModel">
 
 
-    <Grid ColumnDefinitions="*,*,*" HorizontalAlignment="Stretch" ColumnSpacing="10">
+    <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,*" HorizontalAlignment="Stretch" ColumnSpacing="10">
+        <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20">
+            <TextBlock FontSize="48" FontWeight="Bold" Text="DASHBOARD"></TextBlock>
+        </StackPanel>
         <Border Classes="infoCard" >
             <StackPanel >
-                <TextBlock Text="Lärare"></TextBlock>
+                <TextBlock Text="Lärare" Classes="header"></TextBlock>
                 <TextBlock Text="{Binding Teachers.Count}"></TextBlock>
             </StackPanel>
         </Border>
         <Border Grid.Column="1" Classes="infoCard">
             <StackPanel>
-                <TextBlock Text="Studenter"></TextBlock>
+                <TextBlock Text="Studenter" Classes="header"></TextBlock>
                 <TextBlock Text="{Binding Students.Count}"></TextBlock>
             </StackPanel>
         </Border>
         <Border Grid.Column="2" Classes="infoCard">
             <StackPanel>
-                <TextBlock Text="Kurser"></TextBlock>
+                <TextBlock Text="Kurser" Classes="header"></TextBlock>
                 <TextBlock Text="{Binding Courses.Count}"></TextBlock>
             </StackPanel>
         </Border>

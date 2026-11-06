@@ -18,6 +18,7 @@
     </Application.Styles>
              
              <Application.Resources>
+                 <FontFamily x:Key="AppFont">avares://WestCoastEducationClient/Assets/Fonts#Bitcount Single</FontFamily>
                  <SolidColorBrush x:Key="Primary">#FF9B8CFF</SolidColorBrush>
                  <SolidColorBrush x:Key="Secondary">#FF9AA8BD</SolidColorBrush>
 

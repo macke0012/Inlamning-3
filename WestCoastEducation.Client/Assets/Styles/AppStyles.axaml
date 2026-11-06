@@ -8,7 +8,10 @@
 
     <!-- Add Styles Here -->
     <Style Selector="Window">
+        <Setter Property="FontFamily" Value="{DynamicResource AppFont}"></Setter>
+        <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="Background" Value="{DynamicResource Background}"/>
+        <Setter Property="FontSize" Value="12"/>
     </Style>
     <Style Selector="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"></Setter>

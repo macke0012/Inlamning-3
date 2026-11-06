@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using WestCoastEducation.Client.Factories;
 using WestCoastEducation.Client.ViewModels;
@@ -29,9 +30,9 @@ public static class ServiceCollectionExtensions
         collection.AddTransient<HomeViewModel>();
         
         //View Data Models
-        collection.AddTransient<CourseViewModel>();
-        collection.AddTransient<TeacherViewModel>();
-        collection.AddTransient<StudentViewModel>();
+        collection.AddTransient<CoursesViewModel>();
+        collection.AddTransient<TeachersViewModel>();
+        collection.AddTransient<StudentsViewModel>();
         
         //Add data models
         collection.AddTransient<AddTeacherViewModel>();
@@ -46,6 +47,9 @@ public static class ServiceCollectionExtensions
         //Repository
         collection.AddSingleton<IStorageProvider, DataBaseClient>();
         
+        //Navigation Helper
+        collection.AddSingleton<NavigateBack>(c => () => c.GetRequiredService<MainWindowViewModel>().NavigateBack());
+        
         //Backend Services
         collection.AddSingleton<StaffService>();
         collection.AddSingleton<StudentService>();
@@ -56,9 +60,9 @@ public static class ServiceCollectionExtensions
         {
             PageViewsEnum.HOME => c.GetRequiredService<HomeViewModel>(),
             
-            PageViewsEnum.COURSES => c.GetRequiredService<CourseViewModel>(),
-            PageViewsEnum.TEACHER => c.GetRequiredService<TeacherViewModel>(),
-            PageViewsEnum.STUDENT => c.GetRequiredService<StudentViewModel>(),
+            PageViewsEnum.COURSES => c.GetRequiredService<CoursesViewModel>(),
+            PageViewsEnum.TEACHERS => c.GetRequiredService<TeachersViewModel>(),
+            PageViewsEnum.STUDENTS => c.GetRequiredService<StudentsViewModel>(),
             
             PageViewsEnum.ADD_TEACHER => c.GetRequiredService<AddTeacherViewModel>(),
             PageViewsEnum.ADD_STUDENT => c.GetRequiredService<AddStudentViewModel>(),

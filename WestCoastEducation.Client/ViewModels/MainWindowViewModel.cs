@@ -1,12 +1,17 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Extensions.DependencyInjection;
 using WestCoastEducation.Client.Enums;
 using WestCoastEducation.Client.Factories;
+using WestCoastEducation.Client.ViewModels.Courses;
 using WestCoastEducation.Client.ViewModels.Teachers;
 using WestCoastEducation.Core;
+using WestCoastEducation.Core.Models.Course;
 using WestCoastEducation.Core.Models.People;
 using WestCoastEducation.Core.Models.People.Staff;
 
@@ -18,8 +23,12 @@ public partial class MainWindowViewModel : ViewModelBase
     private readonly PageViewFactory _pageViewFactory;
     private readonly School _school;
 
+    public delegate void NavigateToBack();
+
 
     [ObservableProperty] public partial ViewModelBase CurrentPage { get; set; }
+    public string PreviousPage { get; set; } = ""; //Will contain the classname of the previous page
+    
 
 
     public MainWindowViewModel(PageViewFactory pageViewFactory, School school)
@@ -30,31 +39,65 @@ public partial class MainWindowViewModel : ViewModelBase
         
         
     }
+    
+    private void NavigateTo(PageViewsEnum page)
+    {   
+        PreviousPage = CurrentPage.GetType().Name;
+        CurrentPage = _pageViewFactory.LoadPageViewModel(page);
+    }
+
+    public void NavigateBack()
+    {
+        List<string> words = ["Edit", "Add"];
+        bool IsAMainView = !words.Any(word => PreviousPage.Contains(word)); //Kind of redundant since i'm not going back to any other view than the main ones, but better safe than sorry
+        List<string> substrings = Regex.Split(PreviousPage, @"(?<!^)(?=\p{Lu})").ToList(); //Splits the string where there are capitals
+        substrings.RemoveAt(substrings.Count - 1);
+        for (int i = 0; i < substrings.Count; i++)
+        {
+            substrings[i] = substrings[i].ToUpper().Trim();
+        }
+
+        string enumString = "";
+
+        if (IsAMainView)
+        {
+            enumString = substrings[0];
+        }
+        else
+        {
+            enumString += substrings[0] + "_" + substrings[1];
+        }
+        
+        PageViewsEnum page = (PageViewsEnum) Enum.Parse(typeof(PageViewsEnum), enumString);
+        NavigateTo(page);
+    }
 
 
     [RelayCommand]
-    private void NavigateToStudentsPage() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.STUDENT);
+    private void NavigateToStudentsPage() => NavigateTo(PageViewsEnum.STUDENTS);
 
     [RelayCommand]
-    private void NavigateToCoursesPage() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.COURSES);
+
+    private void NavigateToCoursesPage() => NavigateTo(PageViewsEnum.COURSES);
     
     [RelayCommand]
-    private void NavigateToTeachersPage() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.TEACHER);
+
+    private void NavigateToTeachersPage() => NavigateTo(PageViewsEnum.TEACHERS);
     
     
 
     [RelayCommand]
-    private void NavigateToAddTeacher() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.ADD_TEACHER);
+    private void NavigateToAddTeacher() => NavigateTo(PageViewsEnum.ADD_TEACHER);
     [RelayCommand]
-    private void NavigateToAddStudent() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.ADD_STUDENT);
+    private void NavigateToAddStudent() => NavigateTo(PageViewsEnum.ADD_STUDENT);
     [RelayCommand]
-    private void NavigateToAddCourse() => CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.ADD_COURSE);
+    private void NavigateToAddCourse() => NavigateTo(PageViewsEnum.ADD_COURSE);
     
     
     [RelayCommand]
     private void NavigateToEditTeacher(Teacher teacher)
     {
-        CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.EDIT_TEACHER);
+        NavigateTo(PageViewsEnum.EDIT_TEACHER);
         (CurrentPage as EditPersonViewModelBase).Init(teacher);
 
     }
@@ -62,8 +105,15 @@ public partial class MainWindowViewModel : ViewModelBase
     [RelayCommand]
     private void NavigateToEditStudent(Student student)
     {
-        CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.EDIT_STUDENT);
+        NavigateTo(PageViewsEnum.EDIT_STUDENT);
         (CurrentPage as EditPersonViewModelBase).Init(student);
+    }
+
+    [RelayCommand]
+    private void NavigateToEditCourse(BaseCourse course)
+    {
+        NavigateTo(PageViewsEnum.EDIT_COURSE);
+        (CurrentPage as EditCourseViewModel).Init(course);
     }
     
   

@@ -1,0 +1,84 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:WestCoastEducation.Client.ViewModels"
+             xmlns:courses="clr-namespace:WestCoastEducation.Client.ViewModels.Courses"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="courses:CoursesViewModel"
+             x:Class="WestCoastEducation.Client.Views.Courses.CoursesView">
+    <Grid RowDefinitions="Auto, *">
+        <StackPanel Orientation="Horizontal" Spacing="10">
+            <Button Content="Skapa Kurs"
+                    Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToAddCourseCommand}" />
+            <Button Content="Generera 5 Kurser" Command="{Binding GenerateCoursesCommand}"/>
+        </StackPanel>
+        <TableView Grid.Row="1"
+                   SelectionMode="Multiple"
+                   ItemsSource="{Binding Courses}" 
+                   SelectedItems="{Binding SelectedCourses}">
+            <TableView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Delete" Command="{Binding SetShowPopUpCommand}" CommandParameter="Är du säker på att du vill radera de valda kurserna?"></MenuItem>
+                    <MenuItem IsEnabled="{Binding IsEditable}" Header="Edit" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToEditCourseCommand}" CommandParameter="{Binding SelectedCourses[0]}" ></MenuItem>
+                </ContextMenu>
+            </TableView.ContextMenu>
+            <TableView.Columns>
+                <TableViewColumn Header="Kursnummer" Binding="{Binding CourseNumber}"></TableViewColumn>
+                <TableViewColumn Header="Title" Binding="{Binding Title}"></TableViewColumn>
+                <TableViewColumn Header="Startdatum" Binding="{Binding StartDate}"></TableViewColumn>
+                <TableViewColumn Header="Slutdatum" Binding="{Binding EndDate}"></TableViewColumn>
+                <TableViewColumn Header="Kurstyp" Binding="{Binding CourseType }"></TableViewColumn>
+            </TableView.Columns>
+        </TableView>
+        <Panel Grid.RowSpan="2"
+               Background="{DynamicResource Overlay}"
+               IsVisible="{Binding ShowPopUp}">
+            <!-- The dialog box, centered -->
+            <Border HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource ElevatedSurface}"
+                    BorderBrush="{DynamicResource Border}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="20">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="{Binding PopUpPrompt}"/>
+                    <Grid ColumnDefinitions="*,*" ColumnSpacing="8">
+                        <Button Grid.Column="0"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                Background="{DynamicResource Danger}"
+                                Content="Ja"
+                                Command="{Binding DeleteCoursesCommand}"
+                                CommandParameter="{Binding SelectedCourses}"
+                        />
+                        <Button Grid.Column="1"
+                                HorizontalAlignment="Stretch"
+                                HorizontalContentAlignment="Center"
+                                Background="{DynamicResource Secondary}"
+                                Content="Avbryt"
+                                Command="{Binding SetShowPopUpCommand}"/>
+                    </Grid>
+                </StackPanel>
+            </Border>
+        </Panel>
+        <Panel Grid.RowSpan="2"
+               Background="{DynamicResource Overlay}"
+               IsVisible="{Binding ShowSpinner}">
+            <Border HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Background="{DynamicResource ElevatedSurface}"
+                    BorderBrush="{DynamicResource Border}"
+                    BorderThickness="1"
+                    CornerRadius="8"
+                    Padding="20">
+                <StackPanel Spacing="16">
+                    <TextBlock Text="{Binding SpinnerText}"/>
+                    <ProgressRing IsIndeterminate="True"></ProgressRing>
+                    
+                </StackPanel>
+            </Border>
+        </Panel>
+    </Grid>
+</UserControl>

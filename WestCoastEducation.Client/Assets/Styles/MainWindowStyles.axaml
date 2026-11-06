@@ -10,6 +10,5 @@
     <Style Selector="Border.menuContainer">
         <Setter Property="Background" Value="{DynamicResource Surface}"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource Border}"></Setter>
-        <Setter Property="BorderThickness" Value="0,0,2,0"></Setter>
     </Style>
 </Styles>
