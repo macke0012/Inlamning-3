@@ -1,6 +1,5 @@
 
 using MongoDB.Bson.Serialization.Attributes;
-using WestCoastEducation.Core.Models.Course;
 
 namespace WestCoastEducation.Core.Models.People.Staff;
 

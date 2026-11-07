@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
 using WestCoastEducation.Core.Models.Course;
 

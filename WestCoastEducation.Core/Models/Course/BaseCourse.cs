@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
+using WestCoastEducation.Core.Enum;
 using WestCoastEducation.Core.Interfaces;
 
 namespace WestCoastEducation.Core.Models.Course;

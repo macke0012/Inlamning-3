@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using System;
-using WestCoastEducation.Core;
 
 namespace WestCoastEducation.Client;
 

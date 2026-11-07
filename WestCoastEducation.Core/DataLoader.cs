@@ -1,4 +1,3 @@
-using WestCoastEducation.Core.Repositories;
 namespace WestCoastEducation.Core;
 
 static class DataLoader

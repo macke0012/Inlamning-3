@@ -8,7 +8,6 @@ using CommunityToolkit.Mvvm.Input;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Helpers;
 using WestCoastEducation.Core.Models.Course;
-using WestCoastEducation.Core.Models.People;
 
 namespace WestCoastEducation.Client.ViewModels.Courses;
 
@@ -19,8 +18,8 @@ public partial class CoursesViewModel : ViewModelBase
     [ObservableProperty] public partial bool IsEditable { get; set; } = false;
     public CoursesViewModel(School school) : base(school)
     {
-        Init();
-        SelectedCourses.CollectionChanged += (sender, args) =>
+        Task.Run(Init);
+        SelectedCourses?.CollectionChanged += (_, _) =>
         {
             IsEditable = SelectedCourses.Count == 1;
         };
@@ -28,7 +27,7 @@ public partial class CoursesViewModel : ViewModelBase
 
     public async Task Init()
     {
-        List<BaseCourse> courses = await School.GetAllCourses();
+        List<BaseCourse> courses = await School!.GetAllCourses();
         Console.WriteLine(courses.Count);
         Courses = new ObservableCollection<BaseCourse>(courses);
         courses.ForEach(c => Console.WriteLine(c.Id));
@@ -44,7 +43,7 @@ public partial class CoursesViewModel : ViewModelBase
         foreach (var course in courses)
         {
             Console.WriteLine(course.Id);
-            await School.DeleteCourse(course);
+            await School!.DeleteCourse(course);
         }
         SetShowSpinner();
         await Init();
@@ -60,7 +59,17 @@ public partial class CoursesViewModel : ViewModelBase
         SetShowSpinner("Genererar Kurser...");
         var gen = new RandomDataGenerator();
         var students = gen.CreateCourses(5);
-        students.ForEach(c => School.AddCourse(c));
+        students.ForEach(async void (c) =>
+        {
+            try
+            {
+                await School!.AddCourse(c);
+            }
+            catch (Exception e)
+            {
+                ShowSnackbar(e.Message, NotificationType.Error);
+            }
+        });
         await Init();
         SetShowSpinner();
         

@@ -1,15 +1,14 @@
-using System.ComponentModel;
 using System.Text.Json.Serialization;
 using MongoDB.Bson.Serialization.Attributes;
-using WestCoastEducation.Core.Models.Course;
 using WestCoastEducation.Core.Enum;
+using WestCoastEducation.Core.Models.Course;
 
 namespace WestCoastEducation.Core.Models.People.Staff;
 
 public class Teacher : BaseStaff
 {
-    
-    public List<Competencies> CompetenciesList { get; set; }
+
+    public List<Competencies> CompetenciesList { get; set; } = [];
 
     public string KnowledgeArea
     {

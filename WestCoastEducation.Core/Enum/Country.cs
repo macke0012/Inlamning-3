@@ -1,3 +1,5 @@
+namespace WestCoastEducation.Core.Enum;
+
 public enum Country
 {
     Afghanistan,

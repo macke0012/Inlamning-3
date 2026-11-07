@@ -6,8 +6,10 @@ namespace WestCoastEducation.Core.Models.Course;
 public abstract class TeacherLeadBaseCourse : BaseCourse
 {
     [BsonIgnore]
-    public Teacher? Teacher { get; set; } 
-    private string? _teacherId;
+    public Teacher? Teacher { get; set; }
+
+    //private string? TeacherId { get; } = "";
+    
     //LärarId så att man ska kunna hitta läraren som ansvarar för kursen.
 
     

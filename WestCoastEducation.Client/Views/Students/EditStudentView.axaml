@@ -2,7 +2,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:enum="clr-namespace:WestCoastEducation.Core.Enum;assembly=WestCoastEducationCore"
              xmlns:vm="clr-namespace:WestCoastEducation.Client.ViewModels.Students"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:EditStudentViewModel"
@@ -23,7 +22,7 @@
             </StackPanel>
             <StackPanel Classes="inputPanel">
                 <Label Content="Personnummer"></Label>
-                <TextBox Text="{Binding SSN}" />
+                <TextBox Text="{Binding Ssn}" />
             </StackPanel>
             <StackPanel Classes="inputPanel">
                 <Label Content="Email"/>

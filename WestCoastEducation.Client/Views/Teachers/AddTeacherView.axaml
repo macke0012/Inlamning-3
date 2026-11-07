@@ -3,8 +3,6 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:teacher="clr-namespace:WestCoastEducation.Client.ViewModels.Teachers"
-             xmlns:global="clr-namespace:;assembly=WestCoastEducationCore"
-             xmlns:enum="clr-namespace:WestCoastEducation.Core.Enum;assembly=WestCoastEducationCore"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="teacher:AddTeacherViewModel"
              x:Class="WestCoastEducation.Client.Views.Teachers.AddTeacherView">
@@ -43,7 +41,7 @@
             </StackPanel>
             <StackPanel Classes="inputPanel">
                 <Label Content="Personnummer"></Label>
-                <TextBox Text="{Binding SSN}" />
+                <TextBox Text="{Binding Ssn}" />
             </StackPanel>
             <StackPanel Classes="inputPanel">
                 <Label Content="Email"></Label>

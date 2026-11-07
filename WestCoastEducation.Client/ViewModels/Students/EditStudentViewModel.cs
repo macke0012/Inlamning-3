@@ -11,8 +11,8 @@ public class EditStudentViewModel(School school, NavigateBack nb) : EditPersonVi
     protected override void EditPerson()
     {
         base.EditPerson();
-        Task.Run(() => school.UpdateStudent((_person as Student))).Wait();
+        Task.Run(() => School?.UpdateStudent(Person as Student)).Wait();
         ShowSnackbar("Eleven har redigerats.", NotificationType.Success);
-       NavigateBack?.Invoke();
+        NavigateBack?.Invoke();
     }
 }

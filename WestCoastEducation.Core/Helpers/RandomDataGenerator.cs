@@ -34,7 +34,7 @@ public class RandomDataGenerator
         {
             FirstName = p.FirstName,
             LastName = p.LastName,
-            SSN = p.Ssn,
+            Ssn = p.Ssn,
             PhoneNumber = p.Phone,
             Email = p.Email,
             Address = p.Address
@@ -48,7 +48,7 @@ public class RandomDataGenerator
         {
             FirstName = p.FirstName,
             LastName = p.LastName,
-            SSN = p.Ssn,
+            Ssn = p.Ssn,
             PhoneNumber = p.Phone,
             Email = p.Email,
             Address = p.Address,

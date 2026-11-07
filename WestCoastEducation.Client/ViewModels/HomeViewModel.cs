@@ -11,13 +11,13 @@ namespace WestCoastEducation.Client.ViewModels;
 public partial class HomeViewModel : ViewModelBase
 {
     private readonly School _school;
-    [ObservableProperty] public partial ObservableCollection<Teacher> Teachers { get; set; }
-    [ObservableProperty] public partial ObservableCollection<BaseCourse> Courses { get; set; }
-    [ObservableProperty] public partial ObservableCollection<Student> Students { get; set; }
+    [ObservableProperty] public partial ObservableCollection<Teacher> Teachers { get; set; } = [];
+    [ObservableProperty] public partial ObservableCollection<BaseCourse> Courses { get; set; } = [];
+    [ObservableProperty] public partial ObservableCollection<Student> Students { get; set; } = [];
     public HomeViewModel(School school)
     {
         _school = school;
-        Init();
+        Task.Run(Init);
     }
 
     public async Task Init()

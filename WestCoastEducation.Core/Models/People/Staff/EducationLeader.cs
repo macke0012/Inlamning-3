@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using System.Text.Json.Serialization;
 using WestCoastEducation.Core.Models.Course;
 
 namespace WestCoastEducation.Core.Models.People.Staff;
@@ -29,9 +28,9 @@ public class EducationLeader : PermanentStaff
 
     public Teacher? GetTeacher(string id) => _responsibleTeachers.FirstOrDefault(t => t.Id == id);
 
-    public List<Teacher> GetTeacher(string LastName, string FirstName)
+    public List<Teacher> GetTeacher(string lastName, string firstName)
     {
-        return _responsibleTeachers.Where(t => t.LastName.Contains(LastName) && t.FirstName.Contains(FirstName)).ToList();
+        return _responsibleTeachers.Where(t => t.LastName.Contains(lastName) && t.FirstName.Contains(firstName)).ToList();
     }
 
     private bool IsTeacherAssigned(Teacher teacher) => _responsibleTeachers.Any(t => t.Id == teacher.Id);

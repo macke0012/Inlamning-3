@@ -1,6 +1,6 @@
 namespace WestCoastEducation.Core.Interfaces;
 
-public interface IService<T>: IDisposable
+public interface IService<T>
 {
     Task Create(T obj);
     Task Update(T obj);

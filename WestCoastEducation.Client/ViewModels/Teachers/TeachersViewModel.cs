@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PleasantUI.Controls;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Helpers;
 using WestCoastEducation.Core.Models.People.Staff;
@@ -22,9 +21,9 @@ public partial class TeachersViewModel : ViewModelBase
     
     public TeachersViewModel(School school) : base(school)
     {
-        
-        Init();
-        SelectedTeachers.CollectionChanged += (sender, args) =>
+
+        Task.Run(Init);
+        SelectedTeachers.CollectionChanged += (_, _) =>
         {
             IsEditable = SelectedTeachers.Count == 1;
         };
@@ -32,7 +31,7 @@ public partial class TeachersViewModel : ViewModelBase
 
     public async Task Init()
     {
-        List<Teacher> teachers = await School.GetAllTeachers();
+        List<Teacher> teachers = await School!.GetAllTeachers();
         Console.WriteLine(teachers.Count);
         Teachers = new ObservableCollection<Teacher>(teachers);
     }
@@ -45,7 +44,7 @@ public partial class TeachersViewModel : ViewModelBase
         SetShowSpinner("Tar bort lärare...");
         foreach (var teacher in teachers)
         {
-            await School.DeleteStaff(teacher);
+            await School!.DeleteStaff(teacher);
         }
         SetShowSpinner();
         await Init();
@@ -61,7 +60,17 @@ public partial class TeachersViewModel : ViewModelBase
         SetShowSpinner("Genererar Lärare...");
         var gen = new RandomDataGenerator();
         var teachers = gen.CreateTeachers(5);
-        teachers.ForEach(t => School.AddStaff(t));
+        teachers.ForEach(async void (t) =>
+        {
+            try
+            {
+                await School!.AddStaff(t);
+            }
+            catch (Exception e)
+            {
+                ShowSnackbar(e.Message, NotificationType.Error);
+            }
+        });
         await Init();
         SetShowSpinner();
         

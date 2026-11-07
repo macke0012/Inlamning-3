@@ -1,9 +1,8 @@
-using WestCoastEducation.Core.Interfaces;
-
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Text.Unicode;
+using WestCoastEducation.Core.Interfaces;
 
 namespace WestCoastEducation.Core.Repositories;
 
@@ -35,12 +34,12 @@ public class JsonStorageService : IStorageProvider
         catch (DirectoryNotFoundException ex)
         {
             Console.WriteLine(ex.Message);
-            return default;
+            return Task.FromResult<T?>(default);
         }
         catch (FileNotFoundException ex)
         {
             Console.WriteLine(ex.Message);
-            return default;
+            return Task.FromResult<T?>(default);
         }
     }
 
@@ -72,7 +71,7 @@ public class JsonStorageService : IStorageProvider
         {
             string content = File.ReadAllText(entry);
             T parsedEntry = JsonSerializer.Deserialize<T>(content, _options)!;
-            entries.Add(parsedEntry!);
+            entries.Add(parsedEntry);
         }
 
         return Task.FromResult(entries);

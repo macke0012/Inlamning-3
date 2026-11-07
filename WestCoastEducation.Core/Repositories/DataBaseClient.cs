@@ -1,5 +1,4 @@
 using Microsoft.Extensions.Configuration;
-using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Conventions;
 using MongoDB.Driver;
 using WestCoastEducation.Core.Interfaces;
@@ -15,10 +14,11 @@ public class DataBaseClient : IStorageProvider
         // Runs once: camelCase field names, and ignore fields the class doesn't have
         var pack = new ConventionPack
         {
+            
             new CamelCaseElementNameConvention(),
             new IgnoreExtraElementsConvention(true)
         };
-        ConventionRegistry.Register("WestCoastConventions", pack, t => true);
+        ConventionRegistry.Register("WestCoastConventions", pack, _ => true);
     }
 
     public DataBaseClient()
@@ -67,12 +67,5 @@ public class DataBaseClient : IStorageProvider
         Console.WriteLine($"Deleted: {result.DeletedCount}");
     }
 
-    public async Task<IChangeStreamCursor<ChangeStreamDocument<T>>> GetWatcher<T>()
-    {
-        var options = new ChangeStreamOptions
-        {
-            FullDocument = ChangeStreamFullDocumentOption.UpdateLookup
-        };
-        return await Collection<T>().WatchAsync(options);
-    }
+   
 }

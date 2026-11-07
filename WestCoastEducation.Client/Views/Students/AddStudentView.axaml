@@ -22,7 +22,7 @@
             </StackPanel>
             <StackPanel Classes="inputPanel">
                 <Label Content="Personnummer"></Label>
-                <TextBox Text="{Binding SSN}" />
+                <TextBox Text="{Binding Ssn}" />
             </StackPanel>
             <StackPanel Classes="inputPanel">
                 <Label Content="Email"></Label>

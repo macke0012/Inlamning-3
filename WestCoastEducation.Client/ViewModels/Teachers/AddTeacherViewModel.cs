@@ -1,13 +1,10 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Material.Icons.Avalonia;
-using PleasantUI.Controls;
 using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Enum;
@@ -22,7 +19,7 @@ public partial class AddTeacherViewModel(School school, NavigateBack nb) : ViewM
     [ObservableProperty] public partial string LastName { get; set; } = "";
     [ObservableProperty] public partial string Email { get; set; } = "";
     [ObservableProperty] public partial string PhoneNumber { get; set; } = "";
-    [ObservableProperty] public partial string SSN { get; set; } = "";
+    [ObservableProperty] public partial string Ssn { get; set; } = "";
     [ObservableProperty] public partial string Street { get; set; } = "";
     [ObservableProperty] public partial string ZipCode { get; set; } = "";
     [ObservableProperty] public partial string Town { get; set; } = "";
@@ -48,7 +45,7 @@ public partial class AddTeacherViewModel(School school, NavigateBack nb) : ViewM
         {
             FirstName = FirstName,
             LastName = LastName,
-            SSN = SSN,
+            Ssn = Ssn,
             Email = Email,
             PhoneNumber = PhoneNumber,
             Address = new Address
@@ -73,7 +70,7 @@ public partial class AddTeacherViewModel(School school, NavigateBack nb) : ViewM
         LastName = "";
         Email = "";
         PhoneNumber = "";
-        SSN = "";
+        Ssn = "";
         Street = "";
         ZipCode = "";
         Town = "";

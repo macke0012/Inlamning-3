@@ -26,13 +26,13 @@
                <TableViewColumn Header="Efternamn" Binding="{Binding LastName}"></TableViewColumn>
                <TableViewColumn Header="Telefon" Binding="{Binding PhoneNumber}"></TableViewColumn>
                <TableViewColumn Header="E-post" Binding="{Binding Email}"></TableViewColumn>
-               <TableViewColumn Header="Personnummer" Binding="{Binding SSN}"></TableViewColumn>
+               <TableViewColumn Header="Personnummer" Binding="{Binding Ssn}"></TableViewColumn>
                <TableViewColumn Header="Kompetenser" Binding="{Binding KnowledgeArea}"></TableViewColumn>
            </TableView.Columns>
        </TableView>
-       <Panel Grid.RowSpan="2"
-               Background="{DynamicResource Overlay}"
-               IsVisible="{Binding ShowPopUp}">
+       <Panel Grid.Row="0" Grid.RowSpan="2"
+              Background="{DynamicResource Overlay}"
+              IsVisible="{Binding ShowPopUp}">
             <!-- The dialog box, centered -->
             <Border HorizontalAlignment="Center"
                     VerticalAlignment="Center"
@@ -62,7 +62,7 @@
                 </StackPanel>
             </Border>
         </Panel>
-        <Panel Grid.RowSpan="2"
+        <Panel Grid.Row="0" Grid.RowSpan="2"
                Background="{DynamicResource Overlay}"
                IsVisible="{Binding ShowSpinner}">
             <Border HorizontalAlignment="Center"

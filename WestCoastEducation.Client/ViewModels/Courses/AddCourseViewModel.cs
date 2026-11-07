@@ -6,26 +6,27 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
+using WestCoastEducation.Core.Enum;
 using WestCoastEducation.Core.Models;
 using WestCoastEducation.Core.Models.Course;
 
 namespace WestCoastEducation.Client.ViewModels.Courses;
 
-public partial class AddCourseViewModel : ViewModelBase
+public partial class AddCourseViewModel(School school, NavigateBack navigateBack) : ViewModelBase(school, navigateBack)
 {
     //BaseCourse Props
-    [ObservableProperty] public partial string CourseNumber { get; set; }
-    [ObservableProperty] public partial string Title { get; set; }
+    [ObservableProperty] public partial string CourseNumber { get; set; } = "";
+    [ObservableProperty] public partial string Title { get; set; } = "";
     [ObservableProperty] public partial DateTimeOffset StartDate { get; set; } = DateTimeOffset.Now;
     [ObservableProperty] public partial DateTimeOffset EndDate { get; set; } = DateTimeOffset.Now.AddYears(2);
     [ObservableProperty] public partial CourseType CourseType { get; set; } = CourseType.Classroom;
     public CourseType[] CourseTypes { get; } = Enum.GetValues<CourseType>();
     
     //ClassroomCourse Props
-    [ObservableProperty] public partial string Street { get; set; }
-    [ObservableProperty] public partial string ZipCode { get; set; }
-    [ObservableProperty] public partial string Town { get; set; }
-    [ObservableProperty] public partial string LectureHall { get; set; }
+    [ObservableProperty] public partial string Street { get; set; } = "";
+    [ObservableProperty] public partial string ZipCode { get; set; } = "";
+    [ObservableProperty] public partial string Town { get; set; } = "";
+    [ObservableProperty] public partial string LectureHall { get; set; } = "";
     [ObservableProperty] public partial Country Country { get; set; } = Country.Sweden;
     public Country[] Countries { get; } = Enum.GetValues<Country>();
     
@@ -33,16 +34,11 @@ public partial class AddCourseViewModel : ViewModelBase
 
     [ObservableProperty] public partial Platform SelectedPlatform { get; set; } = Platform.Teams;
     public Platform[] Platforms { get; } = Enum.GetValues<Platform>();
-    [ObservableProperty] public partial string MeetingLink { get; set; }
+    [ObservableProperty] public partial string MeetingLink { get; set; } = "";
     
     public bool IsRemoteCourse => CourseType == CourseType.Remote;
     public bool IsClassroomCourse => CourseType == CourseType.Classroom;
 
-    public AddCourseViewModel(School school, NavigateBack navigateBack): base(school, navigateBack)
-    {
-        
-    }
-    
     //So that the view updates the inputs when the course type changes
     protected override void OnPropertyChanged(PropertyChangedEventArgs e)
     {
@@ -57,7 +53,7 @@ public partial class AddCourseViewModel : ViewModelBase
     [RelayCommand]
     private async Task AddCourse()
     {
-        BaseCourse? courseToAdd = null;
+        BaseCourse? courseToAdd;
         switch (CourseType)
         {
             case CourseType.Classroom:
@@ -69,7 +65,7 @@ public partial class AddCourseViewModel : ViewModelBase
             default:
                 throw new ArgumentOutOfRangeException();
         }
-        School.AddCourse(courseToAdd);
+        await School!.AddCourse(courseToAdd);
         ShowSnackbar("Kursen har blivit tillagd!", NotificationType.Success);
         NavigateBack?.Invoke();
     }

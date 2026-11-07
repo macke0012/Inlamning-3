@@ -31,7 +31,7 @@
                 <TableViewColumn Header="Kurstyp" Binding="{Binding CourseType }"></TableViewColumn>
             </TableView.Columns>
         </TableView>
-        <Panel Grid.RowSpan="2"
+        <Panel Grid.Row="0" Grid.RowSpan="2"
                Background="{DynamicResource Overlay}"
                IsVisible="{Binding ShowPopUp}">
             <!-- The dialog box, centered -->
@@ -63,7 +63,7 @@
                 </StackPanel>
             </Border>
         </Panel>
-        <Panel Grid.RowSpan="2"
+        <Panel Grid.Row="0" Grid.RowSpan="2"
                Background="{DynamicResource Overlay}"
                IsVisible="{Binding ShowSpinner}">
             <Border HorizontalAlignment="Center"

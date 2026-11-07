@@ -33,7 +33,14 @@
     <Style Selector="ComboBox">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
     </Style>
-    
-    
-    
+    <Style Selector="StackPanel.inputPanel">
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="Width" Value="300"></Setter>
+    </Style>
+    <Style Selector="StackPanel.inputPanel > DatePicker">
+        <Setter Property="Height" Value="35"></Setter>
+    </Style>
+    <Style Selector="StackPanel.inputPanel > TextBox">
+        <Setter Property="Height" Value="10"></Setter>
+    </Style>
 </Styles>

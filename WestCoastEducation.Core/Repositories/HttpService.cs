@@ -1,10 +1,7 @@
-using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Text.Unicode;
 using Microsoft.Extensions.Configuration;
 using WestCoastEducation.Core.Interfaces;
 
@@ -12,9 +9,9 @@ namespace WestCoastEducation.Core.Repositories;
 
 public class HttpService : IStorageProvider, IDisposable
 {
-    private HttpClient _client { get; } = new();
-    private readonly string _baseUrl = string.Empty;
-    private readonly string _apiKey = string.Empty;
+    private HttpClient Client { get; } = new();
+    private readonly string _baseUrl;
+
     private JsonSerializerOptions _options = new JsonSerializerOptions
     {
         WriteIndented = true,
@@ -32,18 +29,18 @@ public class HttpService : IStorageProvider, IDisposable
             .AddJsonFile("AppSettings.json")
             .Build();
         _baseUrl = config.GetSection("Settings:BASE_URL").Value!;
-        _apiKey = config.GetSection("Settings:API_KEY").Value!;
-        _client.BaseAddress = new Uri(_baseUrl);
-        _client.DefaultRequestHeaders.Add("cache-Control", "no-cache");
+        var apiKey = config.GetSection("Settings:API_KEY").Value!;
+        Client.BaseAddress = new Uri(_baseUrl);
+        Client.DefaultRequestHeaders.Add("cache-Control", "no-cache");
         
-        _client.DefaultRequestHeaders.Add("x-apikey", _apiKey);
+        Client.DefaultRequestHeaders.Add("x-apikey", apiKey);
     }
     
     public async Task Post<T>(T obj) where T : IStorageObject
     {
-        _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+        Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
         string url = $"{_baseUrl}/{obj.GetType().Name.ToLower()}";
-        var responseMessage = await _client.PostAsJsonAsync(url, obj);
+        var responseMessage = await Client.PostAsJsonAsync(url, obj, _options);
         Console.WriteLine(await responseMessage.Content.ReadAsStringAsync());
         Console.WriteLine(url);
         Console.WriteLine(responseMessage.StatusCode);
@@ -54,31 +51,31 @@ public class HttpService : IStorageProvider, IDisposable
     public async Task<T?> Get<T>(string id)
     {
         string url = $"{_baseUrl}/{typeof(T).Name.ToLower().Trim()}/{id}";
-        return await _client.GetFromJsonAsync<T>(url);
+        return await Client.GetFromJsonAsync<T>(url, _options);
     }
 
     public async Task Delete<T>(string id)
     {
         string url = $"{_baseUrl}/{typeof(T).Name.ToLower()}/{id}";
-        await _client.DeleteAsync(url);
+        await Client.DeleteAsync(url);
     }
 
     public async Task<List<T>> GetAll<T>()
     {
         string url = $"{_baseUrl}/{typeof(T).Name.ToLower()}";
-        return await _client.GetFromJsonAsync<List<T>>(url) ?? [];
+        return await Client.GetFromJsonAsync<List<T>>(url, _options) ?? [];
     }
 
     public async Task Put<T>(T obj) where T : IStorageObject
     {
         string url = $"{_baseUrl}/{obj.GetType().Name.ToLower()}/{obj.Id}";
         string jsonString = JsonSerializer.Serialize(obj);
-        await _client.PutAsJsonAsync(url, jsonString);
+        await Client.PutAsJsonAsync(url, jsonString, _options);
     }
 
     public void Dispose()
     {
-        _client.Dispose();
+        Client.Dispose();
         GC.SuppressFinalize(this);
     }
 }

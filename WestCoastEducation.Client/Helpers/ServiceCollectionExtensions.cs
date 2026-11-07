@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.CompilerServices;
 using Microsoft.Extensions.DependencyInjection;
 using WestCoastEducation.Client.Factories;
 using WestCoastEducation.Client.ViewModels;
@@ -11,7 +10,6 @@ using WestCoastEducation.Client.Enums;
 using WestCoastEducation.Client.ViewModels.Courses;
 using WestCoastEducation.Client.ViewModels.Students;
 using WestCoastEducation.Client.ViewModels.Teachers;
-using WestCoastEducation.Client.Views.Students;
 
 
 namespace WestCoastEducation.Client.Helpers;
@@ -49,7 +47,7 @@ public static class ServiceCollectionExtensions
         
         //Navigation Helper
         collection.AddSingleton<NavigateBack>(c => 
-            () => c.GetRequiredService<MainWindowViewModel>().NavigateBack());
+            () => c.GetRequiredService<MainWindowViewModel>().NavigateBackCommand());
         
         //Backend Services
         collection.AddSingleton<StaffService>();

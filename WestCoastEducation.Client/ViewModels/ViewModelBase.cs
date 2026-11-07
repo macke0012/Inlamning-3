@@ -1,13 +1,9 @@
-﻿using System.ComponentModel;
-using Avalonia.Controls.Notifications;
+﻿using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
 using PleasantUI.Controls;
 using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
-using WestCoastEducation.Core.Interfaces;
-using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels;
 

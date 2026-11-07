@@ -1,16 +1,12 @@
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using PleasantUI.Controls;
 using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Enum;
-using WestCoastEducation.Core.Models;
 using WestCoastEducation.Core.Models.People;
 using WestCoastEducation.Core.Models.People.Staff;
 
@@ -26,21 +22,21 @@ public partial class EditTeacherViewModel(School school, NavigateBack nb) : Edit
     public override void Init(Person person)
     {
         base.Init(person);
-        (_person as Teacher).CompetenciesList.ForEach(competency => SelectedCompetencies.Add(competency));
+        (Person as Teacher)?.CompetenciesList.ForEach(competency => SelectedCompetencies.Add(competency));
     }
 
     //Hanterar också kompetens listan.
     protected override void EditPerson()
     {
         base.EditPerson();
-        (_person as Teacher).CompetenciesList = SelectedCompetencies.ToList();
-        Task.Run(() => School.UpdateTeacher(_person as Teacher)).Wait();
+        (Person as Teacher)?.CompetenciesList = SelectedCompetencies.ToList();
+        Task.Run(() => School!.UpdateTeacher(Person as Teacher)).Wait();
         ShowSnackbar("Läraren har redigerats", NotificationType.Success);
         NavigateBack?.Invoke();
         
     }
 
-    override protected void ClearFields()
+    protected override void ClearFields()
     {
         base.ClearFields();
         SelectedCompetencies.Clear();

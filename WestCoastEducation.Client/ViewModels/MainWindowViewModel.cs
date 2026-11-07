@@ -4,12 +4,9 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using CommunityToolkit.Mvvm.Messaging;
-using Microsoft.Extensions.DependencyInjection;
 using WestCoastEducation.Client.Enums;
 using WestCoastEducation.Client.Factories;
 using WestCoastEducation.Client.ViewModels.Courses;
-using WestCoastEducation.Client.ViewModels.Teachers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Models.Course;
 using WestCoastEducation.Core.Models.People;
@@ -21,7 +18,6 @@ namespace WestCoastEducation.Client.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     private readonly PageViewFactory _pageViewFactory;
-    private readonly School _school;
 
     public delegate void NavigateToBack();
 
@@ -31,13 +27,10 @@ public partial class MainWindowViewModel : ViewModelBase
     
 
 
-    public MainWindowViewModel(PageViewFactory pageViewFactory, School school)
+    public MainWindowViewModel(PageViewFactory pageViewFactory, School school) : base(school)
     {
         _pageViewFactory = pageViewFactory;
         CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.HOME);
-        _school = school;
-        
-        
     }
     
     private void NavigateTo(PageViewsEnum page)
@@ -46,10 +39,10 @@ public partial class MainWindowViewModel : ViewModelBase
         CurrentPage = _pageViewFactory.LoadPageViewModel(page);
     }
 
-    public void NavigateBack()
+    public void NavigateBackCommand()
     {
         List<string> words = ["Edit", "Add"];
-        bool IsAMainView = !words.Any(word => PreviousPage.Contains(word)); //Kind of redundant since i'm not going back to any other view than the main ones, but better safe than sorry
+        bool isAMainView = !words.Any(word => PreviousPage.Contains(word)); //Kind of redundant since i'm not going back to any other view than the main ones, but better safe than sorry
         List<string> substrings = Regex.Split(PreviousPage, @"(?<!^)(?=\p{Lu})").ToList(); //Splits the string where there are capitals
         substrings.RemoveAt(substrings.Count - 1);
         for (int i = 0; i < substrings.Count; i++)
@@ -59,7 +52,7 @@ public partial class MainWindowViewModel : ViewModelBase
 
         string enumString = "";
 
-        if (IsAMainView)
+        if (isAMainView)
         {
             enumString = substrings[0];
         }
@@ -98,7 +91,7 @@ public partial class MainWindowViewModel : ViewModelBase
     private void NavigateToEditTeacher(Teacher teacher)
     {
         NavigateTo(PageViewsEnum.EDIT_TEACHER);
-        (CurrentPage as EditPersonViewModelBase).Init(teacher);
+        (CurrentPage as EditPersonViewModelBase)?.Init(teacher);
 
     }
 
@@ -106,14 +99,14 @@ public partial class MainWindowViewModel : ViewModelBase
     private void NavigateToEditStudent(Student student)
     {
         NavigateTo(PageViewsEnum.EDIT_STUDENT);
-        (CurrentPage as EditPersonViewModelBase).Init(student);
+        (CurrentPage as EditPersonViewModelBase)?.Init(student);
     }
 
     [RelayCommand]
     private void NavigateToEditCourse(BaseCourse course)
     {
         NavigateTo(PageViewsEnum.EDIT_COURSE);
-        (CurrentPage as EditCourseViewModel).Init(course);
+        (CurrentPage as EditCourseViewModel)?.Init(course);
     }
     
   

@@ -1,6 +1,4 @@
 using System;
-using System.Collections.ObjectModel;
-using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -8,18 +6,17 @@ using WestCoastEducation.Client.Helpers;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Enum;
 using WestCoastEducation.Core.Models.People;
-using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels;
 
 public abstract partial class EditPersonViewModelBase(School school, NavigateBack nb) : ViewModelBase(school, nb)
 {
-    protected Person _person;
+    protected Person? Person;
     [ObservableProperty] public partial string FirstName { get; set; } = "";
     [ObservableProperty] public partial string LastName { get; set; } = "";
     [ObservableProperty] public partial string Email { get; set; } = "";
     [ObservableProperty] public partial string PhoneNumber { get; set; } = "";
-    [ObservableProperty] public partial string SSN { get; set; } = "";
+    [ObservableProperty] public partial string Ssn { get; set; } = "";
     [ObservableProperty] public partial string Street { get; set; } = "";
     [ObservableProperty] public partial string ZipCode { get; set; } = "";
     [ObservableProperty] public partial string Town { get; set; } = "";
@@ -27,39 +24,39 @@ public abstract partial class EditPersonViewModelBase(School school, NavigateBac
     public Country[] Countries { get; } = Enum.GetValues<Country>();
     public virtual void Init(Person person)
     {
-        this._person = person;
+        this.Person = person;
         
-        FirstName = _person.FirstName;
-        LastName = _person.LastName;
-        Email = _person.Email;
-        PhoneNumber = _person.PhoneNumber;
-        SSN = _person.SSN;
-        Street = _person.Address.Street;
-        ZipCode = _person.Address.ZipCode;
-        Town = _person.Address.Town;
-        Country = _person.Address.Country;
+        FirstName = Person.FirstName;
+        LastName = Person.LastName;
+        Email = Person.Email;
+        PhoneNumber = Person.PhoneNumber;
+        Ssn = Person.Ssn;
+        Street = Person.Address.Street;
+        ZipCode = Person.Address.ZipCode;
+        Town = Person.Address.Town;
+        Country = Person.Address.Country;
         
     }
     
     [RelayCommand]
     protected virtual void EditPerson()
     {
-        if (School is null) return;
+        if (School is null || Person is null) return;
         if (string.IsNullOrWhiteSpace(FirstName)|| string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(PhoneNumber))
         {
             ShowSnackbar("Förnamn, Efternamn och Telefon kan inte vara tomma.", NotificationType.Error);
             return;
 
         }
-        _person.FirstName = FirstName;
-        _person.LastName = LastName;
-        _person.Email = Email;
-        _person.PhoneNumber = PhoneNumber;
-        _person.SSN = SSN;
-        _person.Address.Street = Street;
-        _person.Address.ZipCode = ZipCode;
-        _person.Address.Town = Town;
-        _person.Address.Country = Country;
+        Person.FirstName = FirstName;
+        Person.LastName = LastName;
+        Person.Email = Email;
+        Person.PhoneNumber = PhoneNumber;
+        Person.Ssn = Ssn;
+        Person.Address.Street = Street;
+        Person.Address.ZipCode = ZipCode;
+        Person.Address.Town = Town;
+        Person.Address.Country = Country;
         
     }
     
@@ -69,7 +66,7 @@ public abstract partial class EditPersonViewModelBase(School school, NavigateBac
         LastName = "";
         Email = "";
         PhoneNumber = "";
-        SSN = "";
+        Ssn = "";
         Street = "";
         ZipCode = "";
         Town = "";

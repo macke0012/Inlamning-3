@@ -8,7 +8,7 @@ using WestCoastEducation.Client.Views;
 
 namespace WestCoastEducation.Client;
 
-public partial class App : Application
+public class App : Application
 {
     public override void Initialize()
     {

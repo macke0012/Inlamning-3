@@ -1,8 +1,3 @@
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
-using System.Reflection;
-using System.Text.Json.Serialization;
-using MongoDB.Bson.Serialization.Attributes;
 using WestCoastEducation.Core.Interfaces;
 
 namespace WestCoastEducation.Core.Models.People;
@@ -12,7 +7,7 @@ public abstract class Person : IStorageObject
 
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
-    public required string SSN { get; set; }
+    public required string Ssn { get; set; }
     public required string PhoneNumber { get; set; }
     public required string Email { get; set; }
     public required Address Address { get; set; }
@@ -21,6 +16,6 @@ public abstract class Person : IStorageObject
 
     public override string ToString()
     {
-        return $"{FullName}\nSSN: {SSN}\nPhone: {PhoneNumber}\nEmail: {Email}\n{Address}";
+        return $"{FullName}\nSSN: {Ssn}\nPhone: {PhoneNumber}\nEmail: {Email}\n{Address}";
     }
 }

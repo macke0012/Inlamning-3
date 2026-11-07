@@ -1,17 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using PleasantUI.Controls;
 using WestCoastEducation.Core;
 using WestCoastEducation.Core.Helpers;
 using WestCoastEducation.Core.Models.People;
-using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels.Students;
 
@@ -29,9 +25,9 @@ public partial class StudentsViewModel : ViewModelBase
     public StudentsViewModel(School school) : base(school)
     {
         
-        Init();
+        Task.Run(Init);
         //Updatera bool värdet, om bara en elev är vald, kan man redigera den
-        SelectedStudents.CollectionChanged += (sender, args) =>
+        SelectedStudents.CollectionChanged += (_, _) =>
         {
             IsEditable = SelectedStudents.Count == 1;
         };
@@ -39,7 +35,7 @@ public partial class StudentsViewModel : ViewModelBase
 
     public async Task Init()
     {
-        List<Student> students = await School.GetAllStudents();
+        List<Student> students = await School!.GetAllStudents();
         Console.WriteLine(students.Count);
         Students = new ObservableCollection<Student>(students);
        
@@ -53,7 +49,7 @@ public partial class StudentsViewModel : ViewModelBase
         SetShowSpinner("Tar bort elever...");
         foreach (var student in students)
         {
-            await School.DeleteStudent(student);
+            await School!.DeleteStudent(student);
         }
         SetShowSpinner();
         await Init();
@@ -68,7 +64,17 @@ public partial class StudentsViewModel : ViewModelBase
     {
         var gen = new RandomDataGenerator();
         var students = gen.CreateStudents(5);
-        students.ForEach(s => School.AddStudent(s));
+        students.ForEach(async void (s) =>
+        {
+            try
+            {
+                await School!.AddStudent(s);
+            }
+            catch (Exception e)
+            {
+                ShowSnackbar(e.Message, NotificationType.Error);
+            }
+        });
         await Init();
         
     }

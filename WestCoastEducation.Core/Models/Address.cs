@@ -1,4 +1,4 @@
-using System.ComponentModel;
+using WestCoastEducation.Core.Enum;
 
 namespace WestCoastEducation.Core.Models;
 

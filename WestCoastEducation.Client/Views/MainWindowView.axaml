@@ -13,7 +13,7 @@
 
         <Border Classes="menuContainer">
             
-        <StackPanel Grid.Column="0">
+        <StackPanel>
             <TextBlock Text="Westcoast Education"
                        FontSize="14"
                        FontWeight="Bold"
