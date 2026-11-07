@@ -4,14 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:WestCoastEducation.Client.ViewModels"
              xmlns:courses="clr-namespace:WestCoastEducation.Client.ViewModels.Courses"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="courses:CoursesViewModel"
              x:Class="WestCoastEducation.Client.Views.Courses.CoursesView">
     <Grid RowDefinitions="Auto, *">
-        <StackPanel Orientation="Horizontal" Spacing="10">
-            <Button Content="Skapa Kurs"
-                    Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToAddCourseCommand}" />
-            <Button Content="Generera 5 Kurser" Command="{Binding GenerateCoursesCommand}"/>
+        <StackPanel Orientation="Horizontal" Spacing="5" Margin="5">
+            <Button
+                    Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToAddCourseCommand}">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <avalonia:MaterialIcon Kind="ArchiveAdd" />
+                    <TextBlock Text="Skapa kurs"></TextBlock>
+                </StackPanel>
+            </Button>
+            <Button  Command="{Binding GenerateCoursesCommand}">
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <avalonia:MaterialIcon Kind="Magic" />
+                    <TextBlock Text="Generera 5 kurser"></TextBlock>
+                </StackPanel>
+            </Button>
         </StackPanel>
         <TableView Grid.Row="1"
                    SelectionMode="Multiple"
@@ -19,8 +30,22 @@
                    SelectedItems="{Binding SelectedCourses}">
             <TableView.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Delete" Command="{Binding SetShowPopUpCommand}" CommandParameter="Är du säker på att du vill radera de valda kurserna?"></MenuItem>
-                    <MenuItem IsEnabled="{Binding IsEditable}" Header="Edit" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToEditCourseCommand}" CommandParameter="{Binding SelectedCourses[0]}" ></MenuItem>
+                    <MenuItem IsEnabled="{Binding IsEditable}" Command="{Binding $parent[Window].((vm:MainWindowViewModel)DataContext).NavigateToEditCourseCommand}" CommandParameter="{Binding SelectedCourses[0]}" >
+                        <MenuItem.Icon>
+                            <avalonia:MaterialIcon Kind="ArchiveEdit"></avalonia:MaterialIcon>
+                        </MenuItem.Icon>
+                        <MenuItem.Header>
+                            <TextBlock Text="Redigera"></TextBlock>
+                        </MenuItem.Header>
+                    </MenuItem>
+                    <MenuItem   Command="{Binding SetShowPopUpCommand}" CommandParameter="Är du säker på att du vill radera de valda kurserna?">
+                        <MenuItem.Icon>
+                            <avalonia:MaterialIcon Kind="Delete" Classes="danger"/>
+                        </MenuItem.Icon>
+                        <MenuItem.Header>
+                            <TextBlock Classes="danger" Margin="0" Text="Radera"/>
+                        </MenuItem.Header>
+                    </MenuItem>
                 </ContextMenu>
             </TableView.ContextMenu>
             <TableView.Columns>

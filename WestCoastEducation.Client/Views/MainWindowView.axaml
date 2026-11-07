@@ -3,49 +3,67 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:WestCoastEducation.Client.ViewModels"
+        xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="WestCoastEducation.Client.Views.MainWindowView"
         x:DataType="viewModels:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
-        Title="WestCoastEducationClient">
+        Title="{Binding CurrentPage.PageTitle}">
 
-    <Grid ColumnDefinitions="200, *">
+    <Grid ColumnDefinitions="250, *" RowDefinitions="*, Auto">
 
-        <Border Classes="menuContainer">
-            
-        <StackPanel>
-            <TextBlock Text="Westcoast Education"
-                       FontSize="14"
-                       FontWeight="Bold"
-                       HorizontalAlignment="Center"
-                       Margin="0,10,0,20"
-                       Foreground="{DynamicResource TextPrimary}" />
+        <Border Grid.RowSpan="2" Classes="menuContainer">
 
-            <Button 
-                HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    Margin="5,2"
-                    Command="{Binding NavigateToTeachersPageCommand}">
-                <TextBlock Text="Teachers" />
-            </Button>
+            <Grid RowDefinitions="*, Auto">
+                <StackPanel>
+                    <TextBlock Text="Westcoast Education"
+                               FontSize="18"
+                               FontWeight="Bold"
+                               HorizontalAlignment="Center"
+                               Margin="0,10,0,20"
+                               Foreground="{DynamicResource TextPrimary}" />
 
-            <Button HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    Margin="5,2"
-                    Command="{Binding NavigateToStudentsPageCommand}">
-                <TextBlock Text="Students" />
-            </Button>
+                    <Button Classes="menuButton"
+                            HorizontalAlignment="Stretch"
+                            Command="{Binding NavigateToTeachersPageCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <avalonia:MaterialIcon Kind="Teacher"  />
+                            <TextBlock Text="Lärare"></TextBlock>
+                        </StackPanel>
+                    </Button>
 
-            <Button HorizontalAlignment="Stretch"
-                    HorizontalContentAlignment="Center"
-                    Margin="5,2"
-                    Command="{Binding NavigateToCoursesPageCommand}">
-                <TextBlock Text="Courses" />
-            </Button>
-        </StackPanel>
+                    <Button
+                        Classes="menuButton"
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding NavigateToStudentsPageCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <avalonia:MaterialIcon Kind="AccountStudent"  />
+                            <TextBlock Text="Elever"></TextBlock>
+                        </StackPanel>
+                    </Button>
+
+                    <Button
+                        Classes="menuButton"
+                        HorizontalAlignment="Stretch"
+                        Command="{Binding NavigateToCoursesPageCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <avalonia:MaterialIcon Kind="GoogleClassroom"  />
+                            <TextBlock Text="Kurser"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+                
+                    <Button Grid.Row="1" Classes="menuButton"
+                            Margin="10,10"
+                            Command="{Binding NavigateToHomeCommand}">
+                        <StackPanel Orientation="Horizontal" Spacing="10">
+                            <avalonia:MaterialIcon Kind="Home"  />
+                            <TextBlock Text="Hem"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                
+            </Grid>
         </Border>
-        
-
         <!-- Page host -->
         <ContentControl Grid.Column="1" Content="{Binding CurrentPage}" />
     </Grid>

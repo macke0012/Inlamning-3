@@ -13,8 +13,14 @@ using WestCoastEducation.Core.Models.People.Staff;
 
 namespace WestCoastEducation.Client.ViewModels.Teachers;
 
-public partial class AddTeacherViewModel(School school, NavigateBack nb) : ViewModelBase(school, nb)
+public partial class AddTeacherViewModel : ViewModelBase
 {
+    
+    public AddTeacherViewModel(School school, NavigateBack nb) : base(school, nb)
+    {
+        PageTitle = "Lägg till Lärare";
+    }
+
     [ObservableProperty] public partial string FirstName { get; set; } = "";
     [ObservableProperty] public partial string LastName { get; set; } = "";
     [ObservableProperty] public partial string Email { get; set; } = "";
@@ -27,20 +33,20 @@ public partial class AddTeacherViewModel(School school, NavigateBack nb) : ViewM
     [ObservableProperty] public partial ObservableCollection<Competencies> SelectedCompetencies { get; set; } = [];
     public Country[] Countries { get; } = Enum.GetValues<Country>();
     public Competencies[] Competencies { get; } = Enum.GetValues<Competencies>();
-    
-
 
 
     [RelayCommand]
-    private void AddTeacher()
+    private async Task AddTeacher()
     {
-        if(School is null) return;
-        if (string.IsNullOrWhiteSpace(FirstName)|| string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(PhoneNumber))
+        if (School is null) return;
+        if (string.IsNullOrWhiteSpace(FirstName) || string.IsNullOrWhiteSpace(LastName) ||
+            string.IsNullOrWhiteSpace(PhoneNumber))
         {
             ShowSnackbar("Förnamn, Efternamn och Telefon kan inte vara tomma.", NotificationType.Error);
             return;
-
         }
+        SetShowSpinner("Lägger till lärare...");
+
         var teacher = new Teacher
         {
             FirstName = FirstName,
@@ -56,25 +62,12 @@ public partial class AddTeacherViewModel(School school, NavigateBack nb) : ViewM
                 Country = Country
             },
             CompetenciesList = SelectedCompetencies.ToList()
-            
         };
 
-        Task.Run(() => School.AddStaff(teacher)).Wait();
+        await School.AddStaff(teacher);
+        SetShowSpinner();
         ShowSnackbar($"{FirstName} {LastName} har blivit tillagd som lärare.", NotificationType.Success);
-       NavigateBack?.Invoke();
-    }
-
-    private void ClearFields()
-    {
-        FirstName = "";
-        LastName = "";
-        Email = "";
-        PhoneNumber = "";
-        Ssn = "";
-        Street = "";
-        ZipCode = "";
-        Town = "";
-        Country = Country.Sweden;
+        NavigateBack?.Invoke();
     }
     
 }

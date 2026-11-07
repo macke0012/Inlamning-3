@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Avalonia.Controls.Notifications;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -39,7 +40,7 @@ public abstract partial class EditPersonViewModelBase(School school, NavigateBac
     }
     
     [RelayCommand]
-    protected virtual void EditPerson()
+    protected virtual async Task EditPerson()
     {
         if (School is null || Person is null) return;
         if (string.IsNullOrWhiteSpace(FirstName)|| string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(PhoneNumber))

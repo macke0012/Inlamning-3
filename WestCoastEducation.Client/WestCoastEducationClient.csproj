@@ -6,11 +6,9 @@
         <RootNamespace>WestCoastEducation.Client</RootNamespace>
         <ApplicationManifest>app.manifest</ApplicationManifest>
     </PropertyGroup>
-
     <ItemGroup>
         <AvaloniaResource Include="Assets\**" />
     </ItemGroup>
-
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="12.1.3" />
         <PackageReference Include="Avalonia.Desktop" Version="12.1.3" />

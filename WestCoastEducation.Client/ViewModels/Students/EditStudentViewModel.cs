@@ -6,12 +6,19 @@ using WestCoastEducation.Core.Models.People;
 
 namespace WestCoastEducation.Client.ViewModels.Students;
 
-public class EditStudentViewModel(School school, NavigateBack nb) : EditPersonViewModelBase(school, nb)
+public class EditStudentViewModel : EditPersonViewModelBase
 {
-    protected override void EditPerson()
+    public EditStudentViewModel(School school, NavigateBack nb) : base(school, nb)
     {
-        base.EditPerson();
-        Task.Run(() => School?.UpdateStudent(Person as Student)).Wait();
+        PageTitle = "Redigera elev";
+    }
+
+    protected override async Task EditPerson()
+    {
+        SetShowSpinner("Redigerar eleven...");
+        await base.EditPerson();
+        await School!.UpdateStudent(Person as Student);
+        SetShowSpinner();
         ShowSnackbar("Eleven har redigerats.", NotificationType.Success);
         NavigateBack?.Invoke();
     }

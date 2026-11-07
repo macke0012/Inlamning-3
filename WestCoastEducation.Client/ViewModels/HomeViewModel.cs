@@ -16,6 +16,7 @@ public partial class HomeViewModel : ViewModelBase
     [ObservableProperty] public partial ObservableCollection<Student> Students { get; set; } = [];
     public HomeViewModel(School school)
     {
+        PageTitle = "Hem";
         _school = school;
         Task.Run(Init);
     }

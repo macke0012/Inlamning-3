@@ -18,6 +18,7 @@ namespace WestCoastEducation.Client.ViewModels;
 public partial class MainWindowViewModel : ViewModelBase
 {
     private readonly PageViewFactory _pageViewFactory;
+    
 
     public delegate void NavigateToBack();
 
@@ -31,6 +32,7 @@ public partial class MainWindowViewModel : ViewModelBase
     {
         _pageViewFactory = pageViewFactory;
         CurrentPage = _pageViewFactory.LoadPageViewModel(PageViewsEnum.HOME);
+        
     }
     
     private void NavigateTo(PageViewsEnum page)
@@ -64,6 +66,9 @@ public partial class MainWindowViewModel : ViewModelBase
         PageViewsEnum page = (PageViewsEnum) Enum.Parse(typeof(PageViewsEnum), enumString);
         NavigateTo(page);
     }
+    
+    [RelayCommand]
+    private void NavigateToHome() => NavigateTo(PageViewsEnum.HOME);
 
 
     [RelayCommand]

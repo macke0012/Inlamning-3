@@ -24,7 +24,7 @@ public partial class StudentsViewModel : ViewModelBase
 
     public StudentsViewModel(School school) : base(school)
     {
-        
+        PageTitle = "Elever";
         Task.Run(Init);
         //Updatera bool värdet, om bara en elev är vald, kan man redigera den
         SelectedStudents.CollectionChanged += (_, _) =>
@@ -36,7 +36,6 @@ public partial class StudentsViewModel : ViewModelBase
     public async Task Init()
     {
         List<Student> students = await School!.GetAllStudents();
-        Console.WriteLine(students.Count);
         Students = new ObservableCollection<Student>(students);
        
     }
@@ -62,20 +61,15 @@ public partial class StudentsViewModel : ViewModelBase
     [RelayCommand]
     private async Task GenerateStudent()
     {
+        SetShowSpinner("Genererar elever...");
         var gen = new RandomDataGenerator();
         var students = gen.CreateStudents(5);
-        students.ForEach(async void (s) =>
+        foreach (var student in students)
         {
-            try
-            {
-                await School!.AddStudent(s);
-            }
-            catch (Exception e)
-            {
-                ShowSnackbar(e.Message, NotificationType.Error);
-            }
-        });
+            await School!.AddStudent(student);
+        }
         await Init();
+        SetShowSpinner();
         
     }
     

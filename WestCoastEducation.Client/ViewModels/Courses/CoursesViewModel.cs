@@ -18,6 +18,7 @@ public partial class CoursesViewModel : ViewModelBase
     [ObservableProperty] public partial bool IsEditable { get; set; } = false;
     public CoursesViewModel(School school) : base(school)
     {
+        PageTitle = "Kurser";
         Task.Run(Init);
         SelectedCourses?.CollectionChanged += (_, _) =>
         {
@@ -28,9 +29,8 @@ public partial class CoursesViewModel : ViewModelBase
     public async Task Init()
     {
         List<BaseCourse> courses = await School!.GetAllCourses();
-        Console.WriteLine(courses.Count);
         Courses = new ObservableCollection<BaseCourse>(courses);
-        courses.ForEach(c => Console.WriteLine(c.Id));
+        
        
     }
     
@@ -42,7 +42,6 @@ public partial class CoursesViewModel : ViewModelBase
         SetShowSpinner("Tar bort kurser...");
         foreach (var course in courses)
         {
-            Console.WriteLine(course.Id);
             await School!.DeleteCourse(course);
         }
         SetShowSpinner();
@@ -56,20 +55,13 @@ public partial class CoursesViewModel : ViewModelBase
     [RelayCommand]
     private async Task GenerateCourses()
     {
-        SetShowSpinner("Genererar Kurser...");
+        SetShowSpinner("Genererar kurser...");
         var gen = new RandomDataGenerator();
-        var students = gen.CreateCourses(5);
-        students.ForEach(async void (c) =>
+        var courses = gen.CreateCourses(5);
+        foreach (var course in courses)
         {
-            try
-            {
-                await School!.AddCourse(c);
-            }
-            catch (Exception e)
-            {
-                ShowSnackbar(e.Message, NotificationType.Error);
-            }
-        });
+            await School!.AddCourse(course);
+        }
         await Init();
         SetShowSpinner();
         

@@ -12,8 +12,14 @@ using WestCoastEducation.Core.Models.Course;
 
 namespace WestCoastEducation.Client.ViewModels.Courses;
 
-public partial class AddCourseViewModel(School school, NavigateBack navigateBack) : ViewModelBase(school, navigateBack)
+public partial class AddCourseViewModel : ViewModelBase
 {
+   
+    public AddCourseViewModel(School school, NavigateBack navigateBack) : base(school, navigateBack)
+    {
+        PageTitle = "Lägg till kurs";
+    }
+
     //BaseCourse Props
     [ObservableProperty] public partial string CourseNumber { get; set; } = "";
     [ObservableProperty] public partial string Title { get; set; } = "";
@@ -53,6 +59,7 @@ public partial class AddCourseViewModel(School school, NavigateBack navigateBack
     [RelayCommand]
     private async Task AddCourse()
     {
+        SetShowSpinner("Lägger till kurs...");
         BaseCourse? courseToAdd;
         switch (CourseType)
         {
@@ -66,6 +73,7 @@ public partial class AddCourseViewModel(School school, NavigateBack navigateBack
                 throw new ArgumentOutOfRangeException();
         }
         await School!.AddCourse(courseToAdd);
+        SetShowSpinner();
         ShowSnackbar("Kursen har blivit tillagd!", NotificationType.Success);
         NavigateBack?.Invoke();
     }

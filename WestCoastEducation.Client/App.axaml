@@ -2,6 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="WestCoastEducation.Client.App"
              xmlns:local="using:WestCoastEducation.Client"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              RequestedThemeVariant="Default">
              <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
 
@@ -10,6 +11,7 @@
     </Application.DataTemplates>
 
     <Application.Styles>
+        <avalonia:MaterialIconStyles />
         <PleasantTheme />
         <FluentTheme />
         <StyleInclude Source="/Assets/Styles/AppStyles.axaml"></StyleInclude>

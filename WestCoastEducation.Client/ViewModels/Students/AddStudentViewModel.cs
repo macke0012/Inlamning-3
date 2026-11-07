@@ -11,8 +11,14 @@ using WestCoastEducation.Core.Models.People;
 
 namespace WestCoastEducation.Client.ViewModels.Students;
 
-public partial class AddStudentViewModel(School school, NavigateBack navigateBack) : ViewModelBase(school, navigateBack)
+public partial class AddStudentViewModel : ViewModelBase
 {
+    
+    public AddStudentViewModel(School school, NavigateBack navigateBack) : base(school, navigateBack)
+    {
+        PageTitle = "Lägg till elev";
+    }
+
     [ObservableProperty] public partial string FirstName { get; set; } = "";
     [ObservableProperty] public partial string LastName { get; set; } = "";
     [ObservableProperty] public partial string Email { get; set; } = "";
@@ -27,7 +33,7 @@ public partial class AddStudentViewModel(School school, NavigateBack navigateBac
    
     
     [RelayCommand]
-    private void AddStudent()
+    private async Task AddStudent()
     {
         if(School is null) return;
         if (string.IsNullOrWhiteSpace(FirstName)|| string.IsNullOrWhiteSpace(LastName) || string.IsNullOrWhiteSpace(PhoneNumber))
@@ -36,6 +42,7 @@ public partial class AddStudentViewModel(School school, NavigateBack navigateBac
             return;
 
         }
+        SetShowSpinner("Lägger till elev...");
         var student = new Student
         {
             FirstName = FirstName,
@@ -54,8 +61,9 @@ public partial class AddStudentViewModel(School school, NavigateBack navigateBac
             
         };
 
-        Task.Run(() => School.AddStudent(student)).Wait();
-        ShowSnackbar($"{FirstName} {LastName} har blivit tillagd som student.", NotificationType.Success);
+        await School.AddStudent(student);
+        SetShowSpinner();
+        ShowSnackbar($"{FirstName} {LastName} har blivit tillagd som elev.", NotificationType.Success);
         NavigateBack?.Invoke();
     }
 }

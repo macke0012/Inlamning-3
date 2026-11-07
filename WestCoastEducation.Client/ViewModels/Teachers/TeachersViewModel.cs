@@ -21,7 +21,7 @@ public partial class TeachersViewModel : ViewModelBase
     
     public TeachersViewModel(School school) : base(school)
     {
-
+        PageTitle = "Lärare";
         Task.Run(Init);
         SelectedTeachers.CollectionChanged += (_, _) =>
         {
@@ -32,7 +32,6 @@ public partial class TeachersViewModel : ViewModelBase
     public async Task Init()
     {
         List<Teacher> teachers = await School!.GetAllTeachers();
-        Console.WriteLine(teachers.Count);
         Teachers = new ObservableCollection<Teacher>(teachers);
     }
 
@@ -60,17 +59,10 @@ public partial class TeachersViewModel : ViewModelBase
         SetShowSpinner("Genererar Lärare...");
         var gen = new RandomDataGenerator();
         var teachers = gen.CreateTeachers(5);
-        teachers.ForEach(async void (t) =>
+        foreach (var teacher in teachers)
         {
-            try
-            {
-                await School!.AddStaff(t);
-            }
-            catch (Exception e)
-            {
-                ShowSnackbar(e.Message, NotificationType.Error);
-            }
-        });
+            await School!.AddStaff(teacher);
+        }
         await Init();
         SetShowSpinner();
         

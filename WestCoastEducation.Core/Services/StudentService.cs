@@ -4,16 +4,6 @@ using WestCoastEducation.Core.Models.People;
 
 namespace WestCoastEducation.Core.Services;
 
-public class StudentService : BaseService<Student>
+public class StudentService(IStorageProvider db) : BaseService<Student>(db)
 {
-    public List<Student> Students { get; private set; } = [];
-    public StudentService(IStorageProvider db) : base(db)
-    {
-        
-        
-        
-    }
-
-    
-
 }

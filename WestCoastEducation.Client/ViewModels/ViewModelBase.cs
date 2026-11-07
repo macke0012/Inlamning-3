@@ -56,4 +56,7 @@ public partial class ViewModelBase : ObservableObject
         SpinnerText = content;
         ShowSpinner = !ShowSpinner;
     }
+    
+    [RelayCommand]
+    public void GoBack() => NavigateBack?.Invoke();
 }

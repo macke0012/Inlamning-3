@@ -3,70 +3,91 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="clr-namespace:WestCoastEducation.Client.ViewModels.Teachers"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="vm:EditTeacherViewModel"
              x:Class="WestCoastEducation.Client.Views.Teachers.EditTeacherView">
     <ScrollViewer>
-        <StackPanel>
-            <StackPanel Classes="inputPanel">
+        <Grid Background="{DynamicResource ElevatedSurface}" RowDefinitions="*" ColumnDefinitions="*,*" HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Margin="20">
+            <StackPanel Grid.Column="0" VerticalAlignment="Stretch" Margin="0,10" HorizontalAlignment="Center" Spacing="10">
+                <StackPanel Classes="inputPanel">
 
-                <Label Content="Kompetenser" />
-                <Button Content="Competencies"
-                        HorizontalAlignment="Stretch"
-                        HorizontalContentAlignment="Left">
-                    <Button.Flyout>
-                        <Flyout Placement="BottomEdgeAlignedLeft">
-                            <SelectionList ItemsSource="{Binding Competencies}"
-                                           SelectedItems="{Binding SelectedCompetencies}"
-                                           TitleMemberBinding="{Binding}"
-                                           EmptyMessage="No Competency"
-                                           Width="400"
-                                           MaxHeight="300">
-                            </SelectionList>
-                        </Flyout>
-                    </Button.Flyout>
-                </Button>
+                    <Label Content="Kompetenser" />
+                    <Button Content="Competencies"
+                            HorizontalAlignment="Stretch"
+                            HorizontalContentAlignment="Left">
+                        <Button.Flyout>
+                            <Flyout Placement="BottomEdgeAlignedLeft">
+                                <SelectionList ItemsSource="{Binding Competencies}"
+                                               SelectedItems="{Binding SelectedCompetencies}"
+                                               TitleMemberBinding="{Binding}"
+                                               EmptyMessage="Inga Kompetenser"
+                                               Width="400"
+                                               MaxHeight="300">
+                                </SelectionList>
+                            </Flyout>
+                        </Button.Flyout>
+                    </Button>
+                </StackPanel>
+                <StackPanel Classes="inputPanel">
+                    <Label Content="Förnamn"></Label>
+                    <TextBox Text="{Binding FirstName}" />
+                </StackPanel>
+                <StackPanel Classes="inputPanel">
+                    <Label Content="Efternamn"></Label>
+                    <TextBox Text="{Binding LastName}" />
+                </StackPanel>
+                <StackPanel Classes="inputPanel">
+                    <Label Content="Telefon"></Label>
+                    <TextBox Text="{Binding PhoneNumber}" />
+                </StackPanel>
+                <StackPanel Classes="inputPanel">
+                    <Label Content="Personnummer"></Label>
+                    <TextBox Text="{Binding Ssn}" />
+                </StackPanel>
+                <StackPanel Classes="inputPanel">
+                    <Label Content="Email"></Label>
+                    <TextBox Text="{Binding Email}" />
+                </StackPanel>
+                <StackPanel Classes="inputPanel" Orientation="Horizontal" Spacing="10">
+                    <Button Command="{Binding EditPersonCommand}" HorizontalAlignment="Stretch">
+                        <StackPanel Spacing="10" Orientation="Horizontal">
+                            <avalonia:MaterialIcon Kind="ContentSave" VerticalAlignment="Center" />
+                            <TextBlock Text="Spara" VerticalAlignment="Center" Margin="0,4,0,0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding GoBackCommand}" HorizontalAlignment="Stretch">
+                        <StackPanel Spacing="10" Orientation="Horizontal">
+                            <avalonia:MaterialIcon Kind="CloseCircleOutline"  VerticalAlignment="Center"/>
+                            <TextBlock Text="Avbryt" VerticalAlignment="Center" Margin="0,4,0,0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Classes="inputPanel">
-                <Label Content="Förnamn"></Label>
-                <TextBox Text="{Binding FirstName}" />
+            <StackPanel Grid.Column="1" VerticalAlignment="Stretch" Margin="0,10" HorizontalAlignment="Center">
+                <StackPanel Classes="inputPanel">
+                    <Label Content="Gata"></Label>
+                    <TextBox Text="{Binding Street}" />
+                </StackPanel>
+                <StackPanel Classes="inputPanel">
+                    <Label Content="Postnummer"></Label>
+                    <TextBox Text="{Binding ZipCode}" />
+                </StackPanel>
+                <StackPanel Classes="inputPanel">
+                    <Label Content="Stad"></Label>
+                    <TextBox Text="{Binding Town}" />
+                </StackPanel>
+                <StackPanel Classes="inputPanel">
+                    <Label Content="Land"></Label>
+                    <ComboBox
+                        SelectedItem="{Binding Country}"
+                        ItemsSource="{Binding Countries}">
+                    </ComboBox>
+                </StackPanel>
             </StackPanel>
-            <StackPanel Classes="inputPanel">
-                <Label Content="Efternamn"></Label>
-                <TextBox Text="{Binding LastName}" />
-            </StackPanel>
-            <StackPanel Classes="inputPanel">
-                <Label Content="Telefon"></Label>
-                <TextBox Text="{Binding PhoneNumber}" />
-            </StackPanel>
-            <StackPanel Classes="inputPanel">
-                <Label Content="Personnummer"></Label>
-                <TextBox Text="{Binding Ssn}" />
-            </StackPanel>
-            <StackPanel Classes="inputPanel">
-                <Label Content="Email"></Label>
-                <TextBox Text="{Binding Email}" />
-            </StackPanel>
-            <StackPanel Classes="inputPanel">
-                <Label Content="Gata"></Label>
-                <TextBox Text="{Binding Street}" />
-            </StackPanel>
-            <StackPanel Classes="inputPanel">
-                <Label Content="Postnummer"></Label>
-                <TextBox Text="{Binding ZipCode}" />
-            </StackPanel>
-            <StackPanel Classes="inputPanel">
-                <Label Content="Stad"></Label>
-                <TextBox Text="{Binding Town}" />
-            </StackPanel>
-            <StackPanel Classes="inputPanel">
-                <Label Content="Land"></Label>
-                <ComboBox
-                    SelectedItem="{Binding Country}"
-                    ItemsSource="{Binding Countries}">
-                </ComboBox>
-            </StackPanel>
-            <Button Margin="0,20" Content="Spara Lärare" Command="{Binding EditPersonCommand}"></Button>
-        </StackPanel>
+            
+        </Grid>
     </ScrollViewer>
 </UserControl>

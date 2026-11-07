@@ -3,29 +3,33 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModels="clr-namespace:WestCoastEducation.Client.ViewModels"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="WestCoastEducation.Client.Views.HomeView"
              x:DataType="viewModels:HomeViewModel">
 
 
-    <Grid ColumnDefinitions="*,*,*" RowDefinitions="Auto,*" HorizontalAlignment="Stretch" ColumnSpacing="10">
+    <Grid ColumnDefinitions="*,*,*" RowDefinitions="*,*,*" HorizontalAlignment="Stretch" ColumnSpacing="10">
         <StackPanel Grid.Column="1" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,20">
             <TextBlock FontSize="48" FontWeight="Bold" Text="DASHBOARD"></TextBlock>
         </StackPanel>
-        <Border Grid.Row="0" Grid.Column="0" Classes="infoCard" >
-            <StackPanel >
+        <Border Grid.Row="1" Grid.Column="0" Classes="infoCard" >
+            <StackPanel>
+                <avalonia:MaterialIcon Kind="Teacher" FontSize="32"/>
                 <TextBlock Text="Lärare" Classes="header"></TextBlock>
                 <TextBlock Text="{Binding Teachers.Count}"></TextBlock>
             </StackPanel>
         </Border>
-        <Border Grid.Row="0" Grid.Column="1" Classes="infoCard">
+        <Border Grid.Row="1" Grid.Column="1" Classes="infoCard">
             <StackPanel>
-                <TextBlock Text="Studenter" Classes="header"></TextBlock>
+                <avalonia:MaterialIcon Kind="AccountStudent" FontSize="32"/>
+                <TextBlock Text="Elever" Classes="header"></TextBlock>
                 <TextBlock Text="{Binding Students.Count}"></TextBlock>
             </StackPanel>
         </Border>
-        <Border Grid.Row="0" Grid.Column="2" Classes="infoCard">
+        <Border Grid.Row="1" Grid.Column="2" Classes="infoCard">
             <StackPanel>
+                <avalonia:MaterialIcon Kind="GoogleClassroom" FontSize="32"/>
                 <TextBlock Text="Kurser" Classes="header"></TextBlock>
                 <TextBlock Text="{Binding Courses.Count}"></TextBlock>
             </StackPanel>

@@ -12,9 +12,16 @@ using WestCoastEducation.Core.Models.Course;
 
 namespace WestCoastEducation.Client.ViewModels.Courses;
 
-public partial class EditCourseViewModel(School school, NavigateBack navigateBack) : ViewModelBase(school, navigateBack)
+public partial class EditCourseViewModel : ViewModelBase
 {
-    private string? _id;
+    private string? _id; //Så att rätt kurs blir uppdaterad i DB
+
+ 
+    public EditCourseViewModel(School school, NavigateBack navigateBack) : base(school, navigateBack)
+    {
+        PageTitle = "Redigera kurs";
+    }
+
     //BaseCourse Props
     [ObservableProperty] public partial string CourseNumber { get; set; } = "";
     [ObservableProperty] public partial string Title { get; set; } = "";
@@ -78,9 +85,9 @@ public partial class EditCourseViewModel(School school, NavigateBack navigateBac
     }
 
     [RelayCommand]
-    private async Task AddCourse()
+    private async Task EditCourse()
     {
-        SetShowSpinner("Lägger till kurs...");
+        SetShowSpinner("Redigerar kurs...");
         BaseCourse? courseToAdd;
         
         switch (CourseType)

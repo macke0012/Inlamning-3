@@ -3,15 +3,16 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:courses="clr-namespace:WestCoastEducation.Client.ViewModels.Courses"
+             xmlns:avalonia="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:DataType="courses:EditCourseViewModel"
              x:Class="WestCoastEducation.Client.Views.Courses.EditCourseView">
     <ScrollViewer Background="{DynamicResource Surface}">
         <Grid
             Background="{DynamicResource ElevatedSurface}" ColumnDefinitions="*,*" HorizontalAlignment="Stretch"
-              Margin="10">
+              Margin="20">
 
-            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center">
+            <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" Spacing="10">
                 <StackPanel Classes="inputPanel">
                     <Label Content="Kurs typ"></Label>
                     <ComboBox ItemsSource="{Binding CourseTypes}" SelectedItem="{Binding CourseType}"></ComboBox>
@@ -32,7 +33,20 @@
                     <Label Content="Slutdatum"></Label>
                     <DatePicker SelectedDate="{Binding EndDate}" />
                 </StackPanel>
-                <Button Margin="0,20" Content="Spara Kurs" Command="{Binding AddCourseCommand}"></Button>
+                <StackPanel Classes="inputPanel" Orientation="Horizontal" Spacing="10">
+                    <Button Command="{Binding EditCourseCommand}" HorizontalAlignment="Stretch">
+                        <StackPanel Spacing="10" Orientation="Horizontal">
+                            <avalonia:MaterialIcon Kind="ContentSave" VerticalAlignment="Center" />
+                            <TextBlock Text="Spara" VerticalAlignment="Center" Margin="0,4,0,0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button Command="{Binding GoBackCommand}" HorizontalAlignment="Stretch">
+                        <StackPanel Spacing="10" Orientation="Horizontal">
+                            <avalonia:MaterialIcon Kind="CloseCircleOutline"  VerticalAlignment="Center"/>
+                            <TextBlock Text="Avbryt" VerticalAlignment="Center" Margin="0,4,0,0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
             </StackPanel>
 
 

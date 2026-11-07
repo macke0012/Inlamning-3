@@ -27,7 +27,7 @@ public class DataBaseClient : IStorageProvider
             .AddJsonFile("appsettings.json")
             .Build();
         var connectionUri = config.GetSection("Settings:MONGODB_URI").Value!;
-        Console.WriteLine(connectionUri);
+        
         _database = new MongoClient(connectionUri).GetDatabase("WestCoastEducation");
     }
 
@@ -54,17 +54,13 @@ public class DataBaseClient : IStorageProvider
 
     public async Task Put<T>(T obj) where T : IStorageObject
     {
-        Console.WriteLine(obj.Id);
-        Console.WriteLine(typeof(T).Name.ToLower());
-        var result = await Collection<T>().ReplaceOneAsync(ById<T>(obj.Id), obj);
-        Console.WriteLine($"Matched: {result.MatchedCount}, Modified: {result.ModifiedCount}");
+        await Collection<T>().ReplaceOneAsync(ById<T>(obj.Id), obj);
+        
     }
 
     public async Task Delete<T>(string id)
     {
-        
-        var result = await Collection<T>().DeleteOneAsync(ById<T>(id));
-        Console.WriteLine($"Deleted: {result.DeletedCount}");
+        await Collection<T>().DeleteOneAsync(ById<T>(id));
     }
 
    

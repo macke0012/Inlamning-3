@@ -11,10 +11,14 @@
         <Setter Property="FontFamily" Value="{DynamicResource AppFont}"></Setter>
         <Setter Property="FontWeight" Value="Light"/>
         <Setter Property="Background" Value="{DynamicResource Background}"/>
-        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontSize" Value="16"/>
     </Style>
     <Style Selector="TextBlock">
         <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"></Setter>
+    </Style>
+    
+    <Style Selector="TextBlock.danger">
+        <Setter Property="Foreground" Value="{DynamicResource Danger}"></Setter>
     </Style>
     <Style Selector="Label">
         <Setter Property="Foreground" Value="{DynamicResource TextPrimary}"></Setter>
@@ -43,4 +47,5 @@
     <Style Selector="StackPanel.inputPanel > TextBox">
         <Setter Property="Height" Value="10"></Setter>
     </Style>
+    
 </Styles>

@@ -10,5 +10,18 @@
     <Style Selector="Border.menuContainer">
         <Setter Property="Background" Value="{DynamicResource Surface}"></Setter>
         <Setter Property="BorderBrush" Value="{DynamicResource Border}"></Setter>
+        <Setter Property="BorderThickness" Value="0,0,2,0"/>
+    </Style>
+    <Style Selector="Button.menuButton">
+        <Setter Property="Height" Value="50"/>
+        <Setter Property="FontSize" Value="18"></Setter>
+        <Setter Property="Margin" Value="10,10"></Setter>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+    </Style>
+    <Style Selector="Button.menuButton > StackPanel > TextBlock">
+        
+        <Setter Property="Margin" Value="0,4,0,0"></Setter> <!-- Fonten är lite för hög, använder margin så att den matchar med ikonerna-->
     </Style>
 </Styles>
