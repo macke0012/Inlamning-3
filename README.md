@@ -14,6 +14,9 @@ Som vi kom överens om använde jag MongoDB och deras NuGet-drivrutin istället 
 
 Jag vet också att det inte är optimalt att hämta all data på en gång och att jag borde använda paginering, men "den dagen, den sorgen".
 
+## Användar guide
+Jag har försökt att göra programmet så användarvänligt som möjligt. Man kan högerklicka på posterna i tabellerna för att redigera eller radera. Man kan även välja flera poster för att bulk-radera med Cmd/Ctrl + Click eller Shift + Click. 
+
 ## AI-genererat
 
 - `WestCoastEducation.Core/Helpers/RandomDataGenerator.cs` är **helt AI-genererad**. Den gör ingenting i programmet förutom att skapa mockdata, då jag var för lat för att skapa det själv. Den använder stora listor med slumpmässiga namn, gator och nummer för att skapa lärare, kurser och studenter.
