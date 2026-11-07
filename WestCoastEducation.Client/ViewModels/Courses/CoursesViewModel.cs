@@ -38,7 +38,7 @@ public partial class CoursesViewModel : ViewModelBase
     private async Task DeleteCourses(Collection<BaseCourse> courses)
     {
         SetShowPopUp();
-        if (Courses.Count == 0) return;
+        if (courses.Count == 0) return;
         SetShowSpinner("Tar bort kurser...");
         foreach (var course in courses)
         {
